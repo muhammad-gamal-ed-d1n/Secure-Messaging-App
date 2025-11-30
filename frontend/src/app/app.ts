@@ -8,5 +8,13 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('frontend');
+  activeView = signal<'chat' | 'service'>('chat');
+
+  openMenu() {
+    this.activeView.set('chat');
+  }
+
+  openService() {
+    this.activeView.set('service');
+  }
 }
