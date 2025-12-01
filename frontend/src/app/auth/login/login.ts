@@ -1,18 +1,28 @@
-import { Component, Injectable } from '@angular/core';
+import {Component, Injectable, signal} from '@angular/core';
 import { AuthService } from '../auth service/AuthService';
-import { Router } from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
+import {FormsModule} from '@angular/forms';
 
 @Injectable()
 @Component({
   selector: 'app-login',
-  imports: [],
+  imports: [
+    FormsModule,
+    RouterLink
+  ],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
 export class Login {
   username = "";
   password = "";
-
+  activeView = signal<'signup' | 'login'>('login');
+  signup_screen(){
+    this.activeView.set('signup');
+  }
+  login_screen(){
+    this.activeView.set('login');
+  }
   constructor(private authService: AuthService, private router: Router) { }
 
   login() {
@@ -27,4 +37,6 @@ export class Login {
       }
     );
   }
+
+  protected readonly RouterLink = RouterLink;
 }

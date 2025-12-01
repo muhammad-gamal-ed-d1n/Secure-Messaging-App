@@ -1,2 +1,40 @@
-<form action="" ></form>
-<p>works</p>
+<head>
+  <link rel="stylesheet" href="login.css">
+</head>
+<body>
+<div class="container" [class.right-panel-active]="activeView() === 'signup'">
+    <div class="form-container sign-up-container">
+      <form > <!-- add later sing up and put it in the form (ngSubmit)="signup"-->
+        <h1 style="margin-bottom: 20px;">Create Account</h1>
+        <input type="text" placeholder="Name"/>
+        <input type="password" placeholder="Password" />
+        <button type="submit">Sign Up</button>
+      </form>
+      </div>
+  <div class="form-container sign-in-container">
+    <form (ngSubmit)="login()">
+      <h1 style="margin-bottom: 20px;">Sign in</h1>
+      <input type="text" placeholder="Username">
+      <input type="password" placeholder="Password" />
+      <button routerLink="/app">Sign In</button>
+    </form>
+  </div>
+
+  <div class="overlay-container">
+    <div class="overlay">
+      <div class="overlay-panel overlay-left">
+        <h1>Welcome Back!</h1>
+        <p>To keep connected with us please login with your personal info</p>
+        <button class="ghost" id="signIn" (click)="login_screen()">Sign In</button>
+      </div>
+      <div class="overlay-panel overlay-right" >
+        <h1>Hello, Friend!</h1>
+        <p>Enter your personal details and start journey with us</p>
+        <button class="ghost" id="signUp" (click)="signup_screen()">Sign Up</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+
