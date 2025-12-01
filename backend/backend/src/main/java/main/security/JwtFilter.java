@@ -14,7 +14,6 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 import java.util.ArrayList;
-
 @Component
 public class JwtFilter extends OncePerRequestFilter {
 
@@ -48,6 +47,6 @@ public class JwtFilter extends OncePerRequestFilter {
                 //m4 lazem t3mel 7aga
             }
         }
-        
+        chain.doFilter(req,res);
     }
 }

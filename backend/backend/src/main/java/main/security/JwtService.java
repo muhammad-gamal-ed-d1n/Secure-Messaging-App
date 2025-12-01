@@ -3,9 +3,11 @@ package main.security;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import main.model.User;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
-
+@Service
 public class JwtService {
     private final String SECRET = "5abbeeh fe application.yaml ba3deen";
 
