@@ -1,11 +1,14 @@
 package main.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Set;
 
+@Setter
+@Getter
 @Entity
 public class Chat implements Serializable {
     @Id
@@ -24,27 +27,4 @@ public class Chat implements Serializable {
     @OneToMany(mappedBy = "chat", cascade = CascadeType.ALL)
     private Set<Message> messages;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
-
-    public Set<Message> getMessages() {
-        return messages;
-    }
-
-    public void setMessages(Set<Message> messages) {
-        this.messages = messages;
-    }
 }

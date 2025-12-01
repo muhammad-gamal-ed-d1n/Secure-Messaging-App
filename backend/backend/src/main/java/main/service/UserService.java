@@ -5,6 +5,7 @@ import main.exception.UsernameExistsException;
 import main.model.User;
 import main.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -50,6 +51,9 @@ public class UserService {
         String username = user.getUsername();
 
         if(userRepo.findUserByUsername(username).isEmpty()) {
+            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+            String hashedPass = encoder.encode(user.getPassword());
+            user.setPassword(hashedPass);
             return userRepo.save(user);
         }
         else {
@@ -69,5 +73,9 @@ public class UserService {
 
         List<User> fuzzy = userRepo.findByUsernameContainingIgnoreCase(username);
         return fuzzy;
+    }
+
+    public Optional<User> findUserByUsername(String username) {
+        return userRepo.findUserByUsername(username);
     }
 }
