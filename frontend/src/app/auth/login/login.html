@@ -4,19 +4,19 @@
 <body>
 <div class="container" [class.right-panel-active]="activeView() === 'signup'">
     <div class="form-container sign-up-container">
-      <form > <!-- add later sing up and put it in the form (ngSubmit)="signup"-->
+      <form (ngSubmit)="signup()"> <!-- add later sing up and put it in the form (ngSubmit)="signup"-->
         <h1 style="margin-bottom: 20px;">Create Account</h1>
-        <input type="text" placeholder="Name"/>
-        <input type="password" placeholder="Password" />
+        <input type="text" placeholder="Name" name="username" [(ngModel)]="username" required/>
+        <input type="password" placeholder="Password" name="password" [(ngModel)]="password" required />
         <button type="submit">Sign Up</button>
       </form>
       </div>
   <div class="form-container sign-in-container">
     <form (ngSubmit)="login()">
       <h1 style="margin-bottom: 20px;">Sign in</h1>
-      <input type="text" placeholder="Username">
-      <input type="password" placeholder="Password" />
-      <button routerLink="/app">Sign In</button>
+      <input type="text" placeholder="Username" name="username" [(ngModel)]="username">
+      <input type="password" placeholder="Password" name="password" [(ngModel)]="password" />
+      <button type="submit">Sign In</button>
     </form>
   </div>
 

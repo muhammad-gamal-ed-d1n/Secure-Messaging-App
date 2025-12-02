@@ -37,6 +37,21 @@ export class Login {
       }
     );
   }
-
+  signup(){
+    const user={
+      username:this.username,
+      password:this.password,
+    }
+    console.log(user);
+  this.authService.signup(this.username,this.password).subscribe({
+    next: (res) => {
+      alert("please sing in to continue");
+      this.login_screen();
+    },
+    error: (err) => {
+      console.warn(err);
+    }
+  })
+  }
   protected readonly RouterLink = RouterLink;
 }
