@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { tap } from "rxjs";
+import { AuthRequest } from "../../dto/AuthRequest";
 
 @Injectable({
     providedIn: 'root'
@@ -11,8 +12,10 @@ export class AuthService {
     constructor(private http: HttpClient) {}
 
     login(username: string, password: string) {
+        const loginRequest = new AuthRequest(username, password);
+        
         return this.http.post<{ token: string }>(this.url+'/auth/login',
-            {"username": username, "password": password}).
+            loginRequest).
             pipe(tap(res => localStorage.setItem(this.tokenKey, res.token)));
     }
 
@@ -27,11 +30,11 @@ export class AuthService {
     isLoggedIn(): boolean {
         return !!this.getToken();
     }
+
     signup(username: string, password: string) {
-      const userObject ={
-        "username": username,
-        "password": password
-      }
-      return this.http.post(this.url+'/user/create',userObject,{responseType: "text"});
+      const authRequest = new AuthRequest(username, password);
+
+      return this.http.post<{ token: string }>(this.url+'/auth/signup', authRequest).pipe(
+        tap(res => {localStorage.setItem(this.tokenKey, res.token);}));
     }
 }

@@ -16,32 +16,32 @@ public class UserService {
     @Autowired
     private UserRepo userRepo;
 
-    @PostConstruct
-    public void init() {
-        create("mohamed", "pass1");
-        create("mohammad", "pass2");
-        create("mohamad", "pass3");
-        create("mohammed", "pass4");
-        create("mo", "pass5");
-        create("moo", "pass6");
-        create("moha", "pass7");
-        create("mohaed", "pass8");
-        create("moham", "pass9");
-        create("mohd", "pass10");
-        create("mohsen", "pass11");
-        create("mohannad", "pass12");
-        create("mohab", "pass13");
-        create("mohib", "pass14");
-        create("mona", "pass15");
-        create("monir", "pass16");
-    }
+//    @PostConstruct
+//    public void init() {
+//        create("mohamed", "pass1");
+//        create("mohammad", "pass2");
+//        create("mohamad", "pass3");
+//        create("mohammed", "pass4");
+//        create("mo", "pass5");
+//        create("moo", "pass6");
+//        create("moha", "pass7");
+//        create("mohaed", "pass8");
+//        create("moham", "pass9");
+//        create("mohd", "pass10");
+//        create("mohsen", "pass11");
+//        create("mohannad", "pass12");
+//        create("mohab", "pass13");
+//        create("mohib", "pass14");
+//        create("mona", "pass15");
+//        create("monir", "pass16");
+//    }
 
-    private void create(String username, String password) {
-        User user = new User();
-        user.setUsername(username);
-        user.setPassword(password);
-        this.createUser(user);
-    }
+//    private void create(String username, String password) {
+//        User user = new User();
+//        user.setUsername(username);
+//        user.setPassword(password);
+//        this.createUser(user);
+//    }
 
     public List<User> getAll() {
         return userRepo.findAll();

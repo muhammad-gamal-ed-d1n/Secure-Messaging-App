@@ -8,6 +8,7 @@
         <h1 style="margin-bottom: 20px;">Create Account</h1>
         <input type="text" placeholder="Name" name="username" [(ngModel)]="username" required/>
         <input type="password" placeholder="Password" name="password" [(ngModel)]="password" required />
+        <p style="color: red;">{{ this.error }}</p>
         <button type="submit">Sign Up</button>
       </form>
       </div>
@@ -16,6 +17,7 @@
       <h1 style="margin-bottom: 20px;">Sign in</h1>
       <input type="text" placeholder="Username" name="username" [(ngModel)]="username">
       <input type="password" placeholder="Password" name="password" [(ngModel)]="password" />
+      <p style="color: red;">{{ this.error }}</p>
       <button type="submit">Sign In</button>
     </form>
   </div>
