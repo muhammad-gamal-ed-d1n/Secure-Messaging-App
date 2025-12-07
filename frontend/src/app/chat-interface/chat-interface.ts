@@ -1,16 +1,41 @@
-import {Component, signal} from '@angular/core';
-import {RouterOutlet} from "@angular/router";
+import {Component, Injectable, NgModule, signal} from '@angular/core';
+import {Router, RouterOutlet} from "@angular/router";
+import { AuthService } from '../auth/auth service/AuthService';
+import { User } from '../model/User';
+import { Chat } from '../model/Chat';
+import { FormsModule } from "@angular/forms";
+import { CommonModule } from '@angular/common';
+import { ChatService } from '../chat/chat.service';
 
+@Injectable()
 @Component({
   selector: 'app-chat-interface',
     imports: [
-        RouterOutlet
-    ],
+    RouterOutlet,
+    FormsModule,
+    CommonModule
+],
   templateUrl: './chat-interface.html',
   styleUrl: './chat-interface.css',
 })
 export class ChatInterface {
   activeView = signal<'chat' | 'service'>('chat');
+
+  chats!: Chat[];
+
+  constructor(private authService: AuthService, private router: Router, private chatService: ChatService) {}
+
+  ngOnInit(): void {
+    this.chatService.getChats().subscribe({
+      next: (res: Chat[]) => {
+        this.chats = res;
+        console.log(res);
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    })
+  }
 
   openMenu() {
     this.activeView.set('chat');
@@ -18,5 +43,10 @@ export class ChatInterface {
 
   openService() {
     this.activeView.set('service');
+  }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 }

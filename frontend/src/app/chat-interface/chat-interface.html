@@ -1,250 +1,108 @@
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap"
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="chat-interface.css">
   <title>App</title>
 </head>
 
 <body>
-<div class="container">
-  <div class="left-tab">
-    <div class="inner-tab">
-      <div class="top">
-        <div class="title">
-          <div class="logo-container">
-            <img class="logo" src="/assets/encrypt.png" alt="">
+  <div class="container">
+    <div class="left-tab">
+      <div class="inner-tab">
+        <div class="top">
+          <div class="title">
+            <div class="logo-container">
+              <img class="logo" src="/assets/encrypt.png" alt="">
+            </div>
+            <div class="name">Concypher</div>
           </div>
-          <div class="name">Concypher</div>
-        </div>
-        <div class="add-chat">
-          <img class="add-chat-img" src="/assets/new-message.png" alt="">
-        </div>
-      </div>
-      <div class="search-container">
-        <div class="search-img-container">
-          <img src="/assets/search.png" class="search-img" alt="">
-        </div>
-        <input placeholder="Search Chats" class="search-bar" type="search">
-      </div>
-    </div>
-
-    <div id="encryptionService" class="encryption-service-container" [class.active]="activeView() == 'service'">
-      <div class="encryption-service">
-        <div class="encrypt-decrypt">
-          <div id="encrypt" class="encrypt">Encrypt</div>
-          <div id="decrypt" class="decrypt">Decrypt</div>
-        </div>
-        <div class="parameters">
-          <h4 style="margin-bottom: 2px;">Public Key:</h4>
-          <input class="key" type="text">
-          <h4 style="margin-bottom: 2px;">Message:</h4>
-          <input class="message" type="text">
-          <div class="encrypt-message">encrypt message</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="chat-menu" id="chatMenu" >
-      <div class="chat">
-        <div class="profile-img-container">
-          <img class="profile-img" src="/assets/user.png" alt="">
-        </div>
-        <div class="chat-details">
-          <div class="top-details">
-            <div class="chat-name">Anonymous #1</div>
-            <div class="message-time">10:42am</div>
+          <div class="add-chat">
+            <img class="add-chat-img" src="/assets/new-message.png" alt="">
           </div>
-          <div class="bottom-details">
-            <div class="last-message">Q2VsdHhWb0hZbDRNQkR2Vg==</div>
-            <div class="message-count">2</div>
+        </div>
+        <div class="search-container">
+          <div class="search-img-container">
+            <img src="/assets/search.png" class="search-img" alt="">
+          </div>
+          <input placeholder="Search Chats" class="search-bar" type="search">
+        </div>
+      </div>
+
+      <div id="encryptionService" class="encryption-service-container" [class.active]="activeView() == 'service'">
+        <div class="encryption-service">
+          <div class="encrypt-decrypt">
+            <div id="encrypt" class="encrypt">Encrypt</div>
+            <div id="decrypt" class="decrypt">Decrypt</div>
+          </div>
+          <div class="parameters">
+            <h4 style="margin-bottom: 2px;">Public Key:</h4>
+            <input class="key" type="text">
+            <h4 style="margin-bottom: 2px;">Message:</h4>
+            <input class="message" type="text">
+            <div class="encrypt-message">encrypt message</div>
           </div>
         </div>
       </div>
 
-      <div class="chat">
-        <div class="profile-img-container">
-          <img class="profile-img" src="/assets/user.png" alt="">
-        </div>
-        <div class="chat-details">
-          <div class="top-details">
-            <div class="chat-name">GhostUser12</div>
-            <div class="message-time">9:13am</div>
-          </div>
-          <div class="bottom-details">
-            <div class="last-message">U0ZxWkd3T0JsM1VrbXh3RQ==</div>
-            <div class="message-count">3</div>
-          </div>
-        </div>
-      </div>
+      <div class="chat-menu" id="chatMenu">
 
-      <div class="chat">
-        <div class="profile-img-container">
-          <img class="profile-img" src="/assets/user.png" alt="">
-        </div>
-        <div class="chat-details">
-          <div class="top-details">
-            <div class="chat-name">ShadowTalker</div>
-            <div class="message-time">1:27pm</div>
+        <div *ngFor="let chat in this.chats">
+          <div class="chat">
+            <div class="profile-img-container">
+              <img class="profile-img" src="/assets/user.png" alt="">
+            </div>
+            <div class="chat-details">
+              <div class="top-details">
+                <div class="chat-name">Anonymous #1</div>
+                <div class="message-time">10:42am</div>
+              </div>
+              <div class="bottom-details">
+                <div class="last-message">Q2VsdHhWb0hZbDRNQkR2Vg==</div>
+                <div class="message-count">2</div>
+              </div>
+            </div>
           </div>
-          <div class="bottom-details">
-            <div class="last-message">U3RmU3RwNkhSR0pWb2pFaA==</div>
-            <div class="message-count">1</div>
-          </div>
         </div>
-      </div>
 
-      <div class="chat">
-        <div class="profile-img-container">
-          <img class="profile-img" src="/assets/user.png" alt="">
-        </div>
-        <div class="chat-details">
-          <div class="top-details">
-            <div class="chat-name">Anon_47</div>
-            <div class="message-time">4:55pm</div>
-          </div>
-          <div class="bottom-details">
-            <div class="last-message">S3Z1YzE2Wm1lM1pYUXR4bw==</div>
-            <div class="message-count">1</div>
-          </div>
-        </div>
       </div>
-
-      <div class="chat">
-        <div class="profile-img-container">
-          <img class="profile-img" src="/assets/user.png" alt="">
-        </div>
-        <div class="chat-details">
-          <div class="top-details">
-            <div class="chat-name">EchoWave</div>
-            <div class="message-time">7:11pm</div>
-          </div>
-          <div class="bottom-details">
-            <div class="last-message">WldUQ3pGV3hXM0hYTmZzZw==</div>
-            <div class="message-count">5</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="chat">
-        <div class="profile-img-container">
-          <img class="profile-img" src="/assets/user.png" alt="">
-        </div>
-        <div class="chat-details">
-          <div class="top-details">
-            <div class="chat-name">User_Unknown</div>
-            <div class="message-time">11:02am</div>
-          </div>
-          <div class="bottom-details">
-            <div class="last-message">TjFqY3dYNlB0cVZ6aXBrZA==</div>
-            <div class="message-count">0</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="chat">
-        <div class="profile-img-container">
-          <img class="profile-img" src="/assets/user.png" alt="">
-        </div>
-        <div class="chat-details">
-          <div class="top-details">
-            <div class="chat-name">CipherNode</div>
-            <div class="message-time">6:30pm</div>
-          </div>
-          <div class="bottom-details">
-            <div class="last-message">Q3VtU1pGZ1p2c3pSV1pDWA==</div>
-            <div class="message-count">1</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="chat">
-        <div class="profile-img-container">
-          <img class="profile-img" src="/assets/user.png" alt="">
-        </div>
-        <div class="chat-details">
-          <div class="top-details">
-            <div class="chat-name">NullByte</div>
-            <div class="message-time">8:08pm</div>
-          </div>
-          <div class="bottom-details">
-            <div class="last-message">U0dCR2RFRjZBcnRFaXk1Zw==</div>
-            <div class="message-count">4</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="chat">
-        <div class="profile-img-container">
-          <img class="profile-img" src="/assets/user.png" alt="">
-        </div>
-        <div class="chat-details">
-          <div class="top-details">
-            <div class="chat-name">Anon_Zero</div>
-            <div class="message-time">3:16pm</div>
-          </div>
-          <div class="bottom-details">
-            <div class="last-message">WlBHTXh3R0ZqY2xXbklXUw==</div>
-            <div class="message-count">1</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="chat">
-        <div class="profile-img-container">
-          <img class="profile-img" src="/assets/user.png" alt="">
-        </div>
-        <div class="chat-details">
-          <div class="top-details">
-            <div class="chat-name">VoidSignal</div>
-            <div class="message-time">2:44pm</div>
-          </div>
-          <div class="bottom-details">
-            <div class="last-message">R1hDVlN1Q0hXc0FqV1l4bQ==</div>
-            <div class="message-count">2</div>
-          </div>
-        </div>
-      </div>
-
 
     </div>
-  </div>
-  <div class="warapper">
-    <div class="chat-area">
-      <div class="chat-bar">
-        <div class="profile-img-container">
-          <img class="profile-img" src="/assets/user.png" alt="">
-          <h3 class="username">
-            User #2
-          </h3>
+    <div class="warapper">
+      <div class="chat-area">
+        <div class="chat-bar">
+          <div class="profile-img-container">
+            <img class="profile-img" src="/assets/user.png" alt="">
+            <h3 class="username">
+              User #2
+            </h3>
+          </div>
+          <div class="chat-bar-right">
+            <div class="chat-settings-img-container">
+              <img class="chat-settings-img" src="/assets/chat-settings.png" alt="">
+            </div>
+          </div>
         </div>
-        <div class="chat-bar-right">
-          <div class="chat-settings-img-container">
-            <img class="chat-settings-img" src="/assets/chat-settings.png" alt="">
+        <div class="chat-input-bar">
+          <input type="text" class="chat-input" placeholder="Type a message...">
+          <div class="send-btn">
+            <img src="/assets/send.png" class="send-img" alt="">
           </div>
         </div>
       </div>
-      <div class="chat-input-bar">
-        <input type="text" class="chat-input" placeholder="Type a message...">
-        <div class="send-btn">
-          <img src="/assets/send.png" class="send-img" alt="">
+      <div class="right-tab">
+        <button class="logout" (click)="logout()">logout</button>
+        <div class="chat-menu-selector" id="selectChatMenu" (click)="openMenu()">
+          <img class="chat-menu-img" src="/assets/chat(1).png" alt="">
         </div>
-      </div>
-    </div>
-    <div class="right-tab">
-      <div class="chat-menu-selector" id="selectChatMenu" (click)="openMenu()">
-        <img class="chat-menu-img" src="/assets/chat(1).png" alt="">
-      </div>
-      <div class="encryption-service-selector" id="selectService" (click)="openService()">
-        <img class="encryption-service-img" src="/assets/data-encryption.png" alt="">
+        <div class="encryption-service-selector" id="selectService" (click)="openService()">
+          <img class="encryption-service-img" src="/assets/data-encryption.png" alt="">
+        </div>
       </div>
     </div>
   </div>
-</div>
-<router-outlet></router-outlet>
+  <router-outlet></router-outlet>
 </body>

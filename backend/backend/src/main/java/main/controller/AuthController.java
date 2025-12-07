@@ -2,6 +2,7 @@ package main.controller;
 
 import main.dto.JwtResponse;
 import main.dto.AuthRequest;
+import main.dto.UserDto;
 import main.exception.UsernameExistsException;
 import main.model.User;
 import main.security.JwtService;
@@ -12,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
@@ -59,5 +61,10 @@ public class AuthController {
         } catch (UsernameExistsException e) {
             return new ResponseEntity<String>("Username already exists", HttpStatus.CONFLICT);
         }
+    }
+
+    @GetMapping("/me")
+    public ResponseEntity<?> getCurrentUser(@AuthenticationPrincipal User user) {
+        return new ResponseEntity<UserDto>(new UserDto(user), HttpStatus.OK);
     }
 }

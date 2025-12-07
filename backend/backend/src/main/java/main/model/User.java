@@ -29,4 +29,8 @@ public class User implements Serializable {
     private String password;
     @ManyToMany(mappedBy = "users")
     private Set<Chat> chats;
+
+    public void addChat(Chat chat) {
+        chats.add(chat);
+    }
 }
