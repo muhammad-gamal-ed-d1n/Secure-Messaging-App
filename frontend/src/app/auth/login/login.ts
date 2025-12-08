@@ -1,7 +1,7 @@
-import {Component, Injectable, signal} from '@angular/core';
+import { Component, Injectable, signal } from '@angular/core';
 import { AuthService } from '../auth service/AuthService';
-import {Router, RouterLink} from '@angular/router';
-import {FormsModule} from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Injectable()
 @Component({
@@ -16,11 +16,12 @@ import {FormsModule} from '@angular/forms';
 export class Login {
   username = "";
   password = "";
+  error = "";
   activeView = signal<'signup' | 'login'>('login');
-  signup_screen(){
+  signup_screen() {
     this.activeView.set('signup');
   }
-  login_screen(){
+  login_screen() {
     this.activeView.set('login');
   }
   constructor(private authService: AuthService, private router: Router) { }
@@ -32,26 +33,30 @@ export class Login {
           this.router.navigate(["/app"]);
         },
         error: (err) => {
-          console.warn(err);
+          if (err.status === 401) {
+            this.error = "Invalid username or password"
+          }
+          else {
+            console.log(err)
+          }
         }
       }
     );
   }
-  signup(){
-    const user={
-      username:this.username,
-      password:this.password,
+  signup() {
+    const user = {
+      username: this.username,
+      password: this.password,
     }
     console.log(user);
-  this.authService.signup(this.username,this.password).subscribe({
-    next: (res) => {
-      alert("please sing in to continue");
-      this.login_screen();
-    },
-    error: (err) => {
-      console.warn(err);
-    }
-  })
+    this.authService.signup(this.username, this.password).subscribe({
+      next: (res) => {
+        this.router.navigate(['/app']);
+      },
+      error: (err) => {
+        this.error = err;
+      }
+    })
   }
   protected readonly RouterLink = RouterLink;
 }
