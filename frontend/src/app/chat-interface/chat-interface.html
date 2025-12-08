@@ -50,14 +50,14 @@
 
       <div class="chat-menu" id="chatMenu">
 
-        <div *ngFor="let chat in this.chats">
-          <div class="chat">
+        <div *ngFor="let chat of chats">
+          <div (click)="currentChat = chat" class="chat">
             <div class="profile-img-container">
               <img class="profile-img" src="/assets/user.png" alt="">
             </div>
             <div class="chat-details">
               <div class="top-details">
-                <div class="chat-name">Anonymous #1</div>
+                <div class="chat-name"> {{ chat.otherUsername }} </div>
                 <div class="message-time">10:42am</div>
               </div>
               <div class="bottom-details">
@@ -71,28 +71,37 @@
       </div>
 
     </div>
+
+
     <div class="warapper">
+
       <div class="chat-area">
-        <div class="chat-bar">
-          <div class="profile-img-container">
-            <img class="profile-img" src="/assets/user.png" alt="">
-            <h3 class="username">
-              User #2
-            </h3>
+        <div *ngIf="currentChat" class="chat-area">
+          <div class="chat-bar">
+
+            <div class="profile-img-container">
+              <img class="profile-img" src="/assets/user.png" alt="">
+              <h3 class="username">
+                {{ currentChat.otherUsername }}
+              </h3>
+            </div>
+            <div class="chat-bar-right">
+              <div class="chat-settings-img-container">
+                <img class="chat-settings-img" src="/assets/chat-settings.png" alt="">
+              </div>
+            </div>
           </div>
-          <div class="chat-bar-right">
-            <div class="chat-settings-img-container">
-              <img class="chat-settings-img" src="/assets/chat-settings.png" alt="">
+          <div class="chat-input-bar">
+            <input type="text" class="chat-input" placeholder="Type a message...">
+            <div class="send-btn">
+              <img src="/assets/send.png" class="send-img" alt="">
             </div>
           </div>
         </div>
-        <div class="chat-input-bar">
-          <input type="text" class="chat-input" placeholder="Type a message...">
-          <div class="send-btn">
-            <img src="/assets/send.png" class="send-img" alt="">
-          </div>
-        </div>
+
       </div>
+
+
       <div class="right-tab">
         <button class="logout" (click)="logout()">logout</button>
         <div class="chat-menu-selector" id="selectChatMenu" (click)="openMenu()">

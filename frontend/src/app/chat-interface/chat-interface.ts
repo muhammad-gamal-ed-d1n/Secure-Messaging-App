@@ -1,5 +1,5 @@
-import {Component, Injectable, NgModule, signal} from '@angular/core';
-import {Router, RouterOutlet} from "@angular/router";
+import { ChangeDetectorRef, Component, Injectable, NgModule, signal } from '@angular/core';
+import { Router, RouterOutlet } from "@angular/router";
 import { AuthService } from '../auth/auth service/AuthService';
 import { User } from '../model/User';
 import { Chat } from '../model/Chat';
@@ -10,11 +10,11 @@ import { ChatService } from '../chat/chat.service';
 @Injectable()
 @Component({
   selector: 'app-chat-interface',
-    imports: [
+  imports: [
     RouterOutlet,
     FormsModule,
     CommonModule
-],
+  ],
   templateUrl: './chat-interface.html',
   styleUrl: './chat-interface.css',
 })
@@ -22,19 +22,39 @@ export class ChatInterface {
   activeView = signal<'chat' | 'service'>('chat');
 
   chats!: Chat[];
+  currentUser!: User;
+  currentChat?: Chat;
 
-  constructor(private authService: AuthService, private router: Router, private chatService: ChatService) {}
+  constructor(private authService: AuthService,
+    private router: Router,
+    private chatService: ChatService,
+    private cdr: ChangeDetectorRef
+  ) { }
 
   ngOnInit(): void {
+
+    this.authService.getCurrentUser().subscribe({
+      next: (curr: User) => {
+        this.currentUser = curr;
+        this.cdr.detectChanges();
+      }
+    })
+
     this.chatService.getChats().subscribe({
       next: (res: Chat[]) => {
         this.chats = res;
-        console.log(res);
+      
+        for(let i = 0; i < this.chats.length; i++) {
+          this.chats[i].otherUsername = this.getOtherUsername(this.chats[i]);
+        }
+
+        this.cdr.detectChanges();
       },
       error: (err) => {
         console.log(err);
       }
     })
+
   }
 
   openMenu() {
@@ -48,5 +68,9 @@ export class ChatInterface {
   logout() {
     this.authService.logout();
     this.router.navigate(['/login']);
+  }
+
+  getOtherUsername(chat: Chat) {
+    return chat.users.filter(u => u.username !== this.currentUser.username)[0].username;
   }
 }

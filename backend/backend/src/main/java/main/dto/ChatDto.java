@@ -3,6 +3,7 @@ package main.dto;
 import lombok.Data;
 import main.model.Chat;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -12,6 +13,7 @@ public class ChatDto {
 
     public ChatDto(Chat chat) {
         this.id = chat.getId();
+        this.users = new ArrayList<>();
         chat.getUsers().forEach(user -> {
             this.users.add(new UserDto(user));
         });
