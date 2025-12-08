@@ -6,6 +6,8 @@ import { Chat } from '../model/Chat';
 import { FormsModule } from "@angular/forms";
 import { CommonModule } from '@angular/common';
 import { ChatService } from '../chat/chat.service';
+import {HttpClient} from '@angular/common/http';
+import {Message} from '../model/Message';
 
 @Injectable()
 @Component({
@@ -20,15 +22,16 @@ import { ChatService } from '../chat/chat.service';
 })
 export class ChatInterface {
   activeView = signal<'chat' | 'service'>('chat');
-
+  messagecontent:string='';
   chats!: Chat[];
   currentUser!: User;
   currentChat?: Chat;
-
+  messages:Message[]=[];
   constructor(private authService: AuthService,
     private router: Router,
     private chatService: ChatService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+              private http: HttpClient,
   ) { }
 
   ngOnInit(): void {
@@ -43,20 +46,50 @@ export class ChatInterface {
     this.chatService.getChats().subscribe({
       next: (res: Chat[]) => {
         this.chats = res;
-      
+
         for(let i = 0; i < this.chats.length; i++) {
           this.chats[i].otherUsername = this.getOtherUsername(this.chats[i]);
         }
-
+        if(this.chats.length > 0){
+          this.currentChat = this.chats[0];
+          this.fetchMessages();
+        }
         this.cdr.detectChanges();
       },
       error: (err) => {
         console.log(err);
       }
-    })
-
+    });
   }
 
+  fetchMessages(): void {
+    if(this.currentUser && this.currentChat && this.currentChat.otherUsername){
+      this.chatService.getMessages(this.currentUser.id,this.currentChat.otherUsername).subscribe({
+        next: (res) => {
+          this.messages = res;
+          console.log(this.messages);
+          this.cdr.detectChanges();
+        },
+        error: (err) => {
+          console.log("error fetching");
+        }
+      });
+    }
+  }
+  sendMessage(){
+    if(this.currentUser && this.currentChat && this.currentChat.otherUsername && this.messages.length > 0){
+    this.chatService.sendMessage(this.currentUser.id,this.currentChat.otherUsername,this.messagecontent).subscribe({
+      next: (res) => {
+        this.messages.push(res);
+        this.messagecontent='';
+        this.cdr.detectChanges();
+      },
+      error: (err) => {
+        console.log("failed");
+      }
+    })
+  }
+  }
   openMenu() {
     this.activeView.set('chat');
   }

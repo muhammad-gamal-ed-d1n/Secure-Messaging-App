@@ -1,5 +1,6 @@
 package main.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,10 +19,12 @@ public class Message implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "sender_id", nullable = false)
+    @JsonIgnoreProperties("chats")
     private User sender;
 
     @ManyToOne
     @JoinColumn(name = "recipient_id", nullable = false)
+    @JsonIgnoreProperties("chats")
     private User recipient;
 
     private String content;
@@ -29,6 +32,7 @@ public class Message implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "chat_id")
+    @JsonIgnoreProperties("messages")
     private Chat chat;
 
 }

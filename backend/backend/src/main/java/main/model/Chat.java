@@ -1,5 +1,6 @@
 package main.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,7 +24,7 @@ public class Chat implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
     private Set<User> users;
-
+    @JsonIgnoreProperties("chat")
     @OneToMany(mappedBy = "chat", cascade = CascadeType.ALL)
     private Set<Message> messages;
 

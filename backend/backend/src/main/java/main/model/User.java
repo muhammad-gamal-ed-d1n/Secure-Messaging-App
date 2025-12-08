@@ -1,5 +1,7 @@
 package main.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,8 +28,10 @@ public class User implements Serializable {
     private Long id;
 
     private String username;
+    @JsonIgnore
     private String password;
-    @ManyToMany(mappedBy = "users")
+    @JsonIgnoreProperties("users")
+    @ManyToMany(mappedBy = "users",fetch = FetchType.EAGER)
     private Set<Chat> chats;
 
     public void addChat(Chat chat) {

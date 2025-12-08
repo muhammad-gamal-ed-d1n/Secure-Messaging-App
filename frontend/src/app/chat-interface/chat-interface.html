@@ -91,9 +91,18 @@
               </div>
             </div>
           </div>
+          <div class="messages-container">
+          @for(item of messages ; track $index){
+            <div class="message-recived" [ngClass]="{
+      'message-received': item.received,
+      'message-sent': !item.received}">
+             <span> {{ item.content }}</span>
+            </div>
+          }
+          </div>
           <div class="chat-input-bar">
-            <input type="text" class="chat-input" placeholder="Type a message...">
-            <div class="send-btn">
+            <input type="text" class="chat-input" placeholder="Type a message..." name="message" [(ngModel)]="messagecontent">
+            <div class="send-btn" (click)="sendMessage()">
               <img src="/assets/send.png" class="send-img" alt="">
             </div>
           </div>

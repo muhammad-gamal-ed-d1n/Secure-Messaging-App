@@ -1,6 +1,7 @@
 package main.service;
 
 import jakarta.annotation.PostConstruct;
+import jakarta.transaction.Transactional;
 import main.model.Chat;
 import main.model.User;
 import main.repo.ChatRepo;
@@ -16,21 +17,21 @@ import java.util.Set;
 @Service
 public class ChatService {
 
-//    @PostConstruct
-//    public void init() {
-//        User user = userRepo.findUserByUsername("mohamed").get();
-//        User user2 = userRepo.findUserByUsername("mona").get();
-//
-//        Chat chat = new Chat();
-//        Set<User> set = new HashSet<>();
-//        set.add(user);
-//        set.add(user2);
-//        chat.setUsers(set);
-//        Chat chat1 = createChat(chat);
-//
-//        user.addChat(chat1);
-//        user2.addChat(chat1);
-//    }
+    @PostConstruct
+    @Transactional
+    public void init() {
+        User user = userRepo.findUserByUsername("mohamed").get();
+        User user2 = userRepo.findUserByUsername("mona").get();
+        Chat chat = new Chat();
+       Set<User> set = new HashSet<>();
+       set.add(user);
+        set.add(user2);
+        chat.setUsers(set);
+       Chat chat1 = createChat(chat);
+
+        user.addChat(chat1);
+        user2.addChat(chat1);
+    }
 
     @Autowired
     private ChatRepo chatRepo;
