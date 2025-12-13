@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import { ChatService } from '../chat/chat.service';
 import {HttpClient} from '@angular/common/http';
 import {Message} from '../model/Message';
+import { AddChatComponent } from "../add-chat-component/add-chat-component";
 
 @Injectable()
 @Component({
@@ -15,23 +16,25 @@ import {Message} from '../model/Message';
   imports: [
     RouterOutlet,
     FormsModule,
-    CommonModule
-  ],
+    CommonModule,
+    AddChatComponent
+],
   templateUrl: './chat-interface.html',
   styleUrl: './chat-interface.css',
 })
 export class ChatInterface {
   activeView = signal<'chat' | 'service'>('chat');
+  displaySearch: boolean = false;
   messagecontent:string='';
   chats!: Chat[];
   currentUser!: User;
-  currentChat?: Chat;
+  currentChat?: Chat | null;
   messages:Message[]=[];
   constructor(private authService: AuthService,
     private router: Router,
     private chatService: ChatService,
     private cdr: ChangeDetectorRef,
-              private http: HttpClient,
+    private http: HttpClient,
   ) { }
 
   ngOnInit(): void {
@@ -50,10 +53,6 @@ export class ChatInterface {
         for(let i = 0; i < this.chats.length; i++) {
           this.chats[i].otherUsername = this.getOtherUsername(this.chats[i]);
         }
-        if(this.chats.length > 0){
-          this.currentChat = this.chats[0];
-          this.fetchMessages();
-        }
         this.cdr.detectChanges();
       },
       error: (err) => {
@@ -71,7 +70,7 @@ export class ChatInterface {
           this.cdr.detectChanges();
         },
         error: (err) => {
-          console.log("error fetching");
+          console.log("error fetching: " + err);
         }
       });
     }

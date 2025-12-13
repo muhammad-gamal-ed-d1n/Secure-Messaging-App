@@ -10,6 +10,7 @@
 </head>
 
 <body>
+  <app-add-chat-component (closeSearchSignal)="displaySearch=false" *ngIf="displaySearch"></app-add-chat-component>
   <div class="container">
     <div class="left-tab">
       <div class="inner-tab">
@@ -21,7 +22,7 @@
             <div class="name">Concypher</div>
           </div>
           <div class="add-chat">
-            <img class="add-chat-img" src="/assets/new-message.png" alt="">
+            <img (click)="displaySearch=true" class="add-chat-img" src="/assets/new-message.png" alt="">
           </div>
         </div>
         <div class="search-container">
@@ -51,7 +52,7 @@
       <div class="chat-menu" id="chatMenu">
 
         <div *ngFor="let chat of chats">
-          <div (click)="currentChat = chat" class="chat">
+          <div (click)="currentChat = chat; fetchMessages()" class="chat">
             <div class="profile-img-container">
               <img class="profile-img" src="/assets/user.png" alt="">
             </div>
@@ -87,7 +88,7 @@
             </div>
             <div class="chat-bar-right">
               <div class="chat-settings-img-container">
-                <img class="chat-settings-img" src="/assets/chat-settings.png" alt="">
+                <img (click)="currentChat = null" class="chat-settings-img" src="/assets/back.png" alt="">
               </div>
             </div>
           </div>

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,9 +18,9 @@ public class UserService {
     @Autowired
     private UserRepo userRepo;
 
-   @PostConstruct
-   public void init() {
-       create("mohamed", "pass1");
+//    @PostConstruct
+//    public void init() {
+//       create("mohamed", "pass1");
 //       create("mohammad", "pass2");
 //        create("mohamad", "pass3");
 //        create("mohammed", "pass4");
@@ -33,9 +34,9 @@ public class UserService {
 //        create("mohannad", "pass12");
 //        create("mohab", "pass13");
 //        create("mohib", "pass14");
-        create("mona", "pass15");
+//        create("mona", "pass15");
 //        create("monir", "pass16");
-    }
+//     }
 
     private void create(String username, String password) {
         User user = new User();
@@ -66,10 +67,10 @@ public class UserService {
         return userRepo.findUserById(id).get();
     }
 
-    public Object searchUsers(String username) {
+    public List<User> searchUsers(String username) {
         Optional<User> match = userRepo.findUserByUsername(username);
         if(match.isPresent()) {
-            return match.get();
+            return Collections.singletonList(match.get());
         }
 
         List<User> fuzzy = userRepo.findByUsernameContainingIgnoreCase(username);

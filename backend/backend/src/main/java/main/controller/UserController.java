@@ -35,7 +35,7 @@ public class UserController {
     }
 
     @GetMapping("/search/{username}")
-    public ResponseEntity<?> searchUsers(@PathVariable String username) {
+    public ResponseEntity<List<User>> searchUsers(@PathVariable String username) {
         return new ResponseEntity<>(userService.searchUsers(username), HttpStatus.OK);
     }
 

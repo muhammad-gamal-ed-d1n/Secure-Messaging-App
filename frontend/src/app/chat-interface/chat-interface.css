@@ -475,11 +475,19 @@ chat-menu.active {
   margin-bottom: 10px;
 }
 .message-received span, .message-sent span{
-  border:2px solid #32d348;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.4);
   padding: 10px;
   border-radius: 10px;
 }
+
+.message-received span {
+  border:2px solid #727c74;
+}
+
+.message-sent span {
+  border:2px solid #000000;
+}
+
 .message-sent{
   margin-left: auto;
   margin-top: 20px;
