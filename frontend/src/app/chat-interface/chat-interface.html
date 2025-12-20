@@ -70,7 +70,15 @@
         </div>
 
       </div>
-
+      <div class="controllers">
+        <button class="logout" (click)="logout()">logout</button>
+        <div class="chat-menu-selector" id="selectChatMenu" (click)="openMenu()">
+          <img class="chat-menu-img" src="/assets/chat(1).png" alt="">
+        </div>
+        <div class="encryption-service-selector" id="selectService" (click)="openService()">
+          <img class="encryption-service-img" src="/assets/data-encryption.png" alt="">
+        </div>
+      </div>
     </section>
 
 
@@ -110,17 +118,6 @@
           </div>
         </div>
 
-      </div>
-
-
-      <div class="right-tab">
-        <button class="logout" (click)="logout()">logout</button>
-        <div class="chat-menu-selector" id="selectChatMenu" (click)="openMenu()">
-          <img class="chat-menu-img" src="/assets/chat(1).png" alt="">
-        </div>
-        <div class="encryption-service-selector" id="selectService" (click)="openService()">
-          <img class="encryption-service-img" src="/assets/data-encryption.png" alt="">
-        </div>
       </div>
     </div>
   </div>

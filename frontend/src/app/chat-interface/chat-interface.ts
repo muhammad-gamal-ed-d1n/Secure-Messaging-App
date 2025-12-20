@@ -51,6 +51,7 @@ export class ChatInterface {
     this.chatService.getChats().subscribe({
       next: (res: Chat[]) => {
         this.chats = res;
+        this.filteredChats = this.chats;
 
         for(let i = 0; i < this.chats.length; i++) {
           this.chats[i].otherUsername = this.getOtherUsername(this.chats[i]);
