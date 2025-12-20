@@ -1,11 +1,11 @@
 <div class="modal-container" (click)="outsideClick($event)">
     <div class="modal">
         <div (click)="closeModal()" class="back">
-            <img src="/assets/back.png" class="back-img" alt="">
+            <img src="/assets/back.png" class="back-img" alt="exit" title="close">
         </div>
-        <input [(ngModel)]="currentInput" (input)="searchForUser()" class="search-bar" type="text" name="" id="" placeholder="Search for users">
+        <input #myInput [(ngModel)]="currentInput" (input)="searchForUser()" class="search-bar" type="text" name="" id="" placeholder="Search for users">
         <div class="results">
-            <div class="user" *ngFor="let user of users" (click)="addUser(user)">
+            <div class="user" *ngFor="let user of users" (click)="addUser(user)" title="New chat with {{ user.username }}">
                 <div class="container">
                     <div class="img-container">
                         <img src="/assets/user.png" class="user-img" alt="">
@@ -15,7 +15,7 @@
                     </div>
                 </div>
                 <div class="add-btn">
-                    <img src="/assets/new-message.png" class="add-user-img" alt="">
+                    <img src="/assets/new-message.png" class="add-user-img" alt="add-user">
                 </div>
             </div>
         </div>
