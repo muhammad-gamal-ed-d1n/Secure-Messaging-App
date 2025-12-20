@@ -4,7 +4,11 @@
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.security/spring-security-crypto/7.0.0/b0dd95e57fdbbacc21d89c19ff194224d1e9f042/spring-security-crypto-7.0.0.jar!/" />
     </CLASSES>
-    <JAVADOC />
-    <SOURCES />
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.security/spring-security-crypto/7.0.0/a3b1b918c404cd2b6bb6413f93e885403898d545/spring-security-crypto-7.0.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.security/spring-security-crypto/7.0.0/b6627874ff9199c89d967566c7cf20e74b43a091/spring-security-crypto-7.0.0-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>

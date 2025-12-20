@@ -4,7 +4,11 @@
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-jdbc/7.0.1/aa29287fc88299e23b9dcec9251a7a4a70e46248/spring-jdbc-7.0.1.jar!/" />
     </CLASSES>
-    <JAVADOC />
-    <SOURCES />
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-jdbc/7.0.1/d06905bebe4f536992b536f0f083009f2d5fbc56/spring-jdbc-7.0.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-jdbc/7.0.1/17587e9d0d2923efc6e604e60301442b3f7943dd/spring-jdbc-7.0.1-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>

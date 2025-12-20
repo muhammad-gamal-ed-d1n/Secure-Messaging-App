@@ -4,7 +4,11 @@
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.junit.platform/junit-platform-commons/6.0.1/d124ca836a0366bc499eb0dfb4ee63a8e602c8ff/junit-platform-commons-6.0.1.jar!/" />
     </CLASSES>
-    <JAVADOC />
-    <SOURCES />
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.junit.platform/junit-platform-commons/6.0.1/3bf3a8e200103190e90d1b4701a3c8f9018870aa/junit-platform-commons-6.0.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.junit.platform/junit-platform-commons/6.0.1/19eefc1141bf72446feba2dc4038468e6bd6be6/junit-platform-commons-6.0.1-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>

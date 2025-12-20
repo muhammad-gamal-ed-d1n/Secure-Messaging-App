@@ -4,7 +4,11 @@
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-expression/7.0.1/e094d34f17777125adcb01ed5778075aa876c8e6/spring-expression-7.0.1.jar!/" />
     </CLASSES>
-    <JAVADOC />
-    <SOURCES />
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-expression/7.0.1/80ddc2e79f1f98a24402fb80cf898c025fc15437/spring-expression-7.0.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-expression/7.0.1/5053e6807f2279b9af1b7427d884b075481f8cca/spring-expression-7.0.1-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>

@@ -4,7 +4,11 @@
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/ch.qos.logback/logback-classic/1.5.21/904915aa29a0bbff111ae90ed85541b2991a72fc/logback-classic-1.5.21.jar!/" />
     </CLASSES>
-    <JAVADOC />
-    <SOURCES />
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/ch.qos.logback/logback-classic/1.5.21/3c4db523688e2221e739a7ef73ef5839dd539f7b/logback-classic-1.5.21-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/ch.qos.logback/logback-classic/1.5.21/a308e5a2c62a422c73c3f0eb7b2e58102d31539a/logback-classic-1.5.21-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>

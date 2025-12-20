@@ -4,7 +4,11 @@
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-persistence/4.0.0/ca621f8aaebb3578e648bd6fd4ca61a059a98ee2/spring-boot-persistence-4.0.0.jar!/" />
     </CLASSES>
-    <JAVADOC />
-    <SOURCES />
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-persistence/4.0.0/938dd0a2278e234502692ba8805fd2e22c086776/spring-boot-persistence-4.0.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-persistence/4.0.0/dfa8633ef817bc9fd51465fb6f4f887cea914392/spring-boot-persistence-4.0.0-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>
