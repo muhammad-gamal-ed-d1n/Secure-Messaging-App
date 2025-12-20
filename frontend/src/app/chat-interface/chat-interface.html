@@ -29,7 +29,7 @@
           <div class="search-img-container">
             <img src="/assets/search.png" class="search-img" alt="">
           </div>
-          <input placeholder="Search Chats" class="search-bar" type="search">
+          <input (input)="searchChats($event.target.value)" placeholder="Search Chats" class="search-bar" type="search">
         </div>
       </div>
 
@@ -51,7 +51,7 @@
 
       <div class="chat-menu" id="chatMenu">
 
-        <div *ngFor="let chat of chats" title="View chat">
+        <div *ngFor="let chat of filteredChats" title="View chat">
           <div (click)="currentChat = chat; fetchMessages()" class="chat">
             <div class="profile-img-container">
               <img class="profile-img" src="/assets/user.png" alt="">

@@ -9,6 +9,7 @@ import { ChatService } from '../chat/chat.service';
 import {HttpClient} from '@angular/common/http';
 import {Message} from '../model/Message';
 import { AddChatComponent } from "../add-chat-component/add-chat-component";
+import { filter } from 'rxjs';
 
 @Injectable()
 @Component({
@@ -27,6 +28,7 @@ export class ChatInterface {
   displaySearch: boolean = false;
   messagecontent:string='';
   chats!: Chat[];
+  filteredChats!: Chat[];
   currentUser!: User;
   currentChat?: Chat | null;
   messages:Message[]=[];
@@ -114,5 +116,11 @@ export class ChatInterface {
       users: [this.currentUser, user],
       otherUsername: user.username,
     };
+  }
+  searchChats(searchInput: string) {
+    this.filteredChats = this.chats.filter(chat => 
+      chat.otherUsername.toLowerCase().includes(searchInput.toLowerCase())
+    );
+    this.cdr.detectChanges();
   }
 }
