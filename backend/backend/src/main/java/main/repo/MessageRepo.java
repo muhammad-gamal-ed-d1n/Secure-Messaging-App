@@ -20,13 +20,13 @@ public interface MessageRepo extends JpaRepository<Message, Long> {
     @Modifying
     @Transactional // Ensures the update is committed to the DB
     @Query("UPDATE Message m SET m.state = 'read' " +
-            "WHERE m.sender.id = :senderId " +
-            "AND m.recipient.id = :userId ")
-    void markMessagesAsRead(@Param("senderId") Long senderId, @Param("reciverId") Long reciverId);
+            "WHERE m.sender.username = :sender " +
+            "AND m.recipient.id = :reciver ")
+    void markMessagesAsRead(@Param("sender") String sender, @Param("reciver") Long reciver);
     @Modifying
     @Transactional // Ensures the update is committed to the DB
     @Query("UPDATE Message m SET m.state = 'Recieved' " +
-            "WHERE m.recipient.id = :userId " +
+            "WHERE m.recipient.id = :reciverId " +
             "AND m.state = 'NotRead'")
     void markMessageAsRecived(@Param("reciverId") Long reciverId);
 }

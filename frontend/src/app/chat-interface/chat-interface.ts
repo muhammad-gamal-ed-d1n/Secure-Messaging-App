@@ -6,7 +6,7 @@ import { Chat } from '../model/Chat';
 import { FormsModule } from "@angular/forms";
 import { CommonModule } from '@angular/common';
 import { ChatService } from '../chat/chat.service';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Message} from '../model/Message';
 import { AddChatComponent } from "../add-chat-component/add-chat-component";
 import { filter } from 'rxjs';
@@ -76,12 +76,18 @@ export class ChatInterface {
           console.log("error fetching: " + err);
         }
       });
+     this.chatService.setRead(this.currentUser.id,this.currentChat.otherUsername).subscribe({
+       next: (res) => {
+       },
+       error: (err) => {
+       }
+     })
     }
   }
   sendMessage(){
     if(this.currentUser && this.currentChat && this.currentChat.otherUsername && this.messagecontent.length>0 ){
       console.log("did we make it this time");
-      
+
     this.chatService.sendMessage(this.currentUser.id,this.currentChat.otherUsername,this.messagecontent).subscribe({
       next: (res) => {
         this.messages.push(res);
@@ -119,7 +125,7 @@ export class ChatInterface {
     };
   }
   searchChats(searchInput: string) {
-    this.filteredChats = this.chats.filter(chat => 
+    this.filteredChats = this.chats.filter(chat =>
       chat.otherUsername.toLowerCase().includes(searchInput.toLowerCase())
     );
     this.cdr.detectChanges();

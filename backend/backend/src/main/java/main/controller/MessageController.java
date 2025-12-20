@@ -41,8 +41,8 @@ public class MessageController {
         return ResponseEntity.ok(messages);
     }
     @PutMapping("/state")
-    public ResponseEntity<Void> readMessages(@RequestParam("senderId") Long senderId, @RequestParam("reciverId") Long reciverId) {
-        messageRepo.markMessagesAsRead(senderId,reciverId);
+    public ResponseEntity<Void> readMessages(@RequestParam("sender") String sender, @RequestParam("reciver") Long reciver) {
+        messageRepo.markMessagesAsRead(sender,reciver);
         return ResponseEntity.noContent().build();
     }
 }

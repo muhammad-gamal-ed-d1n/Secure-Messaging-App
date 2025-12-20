@@ -33,6 +33,7 @@ public class SecurityConfig {
                         requestMatchers("/api/message/allmessages/**").permitAll().
                         requestMatchers("/api/message/create").permitAll().
                         requestMatchers("/api/user/search/**").permitAll().
+                        requestMatchers("/api/message/state").permitAll().
                         anyRequest().authenticated()).
                 addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
