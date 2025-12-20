@@ -1,11 +1,11 @@
-<div class="modal-container">
+<div class="modal-container" (click)="outsideClick($event)">
     <div class="modal">
         <div (click)="closeModal()" class="back">
             <img src="/assets/back.png" class="back-img" alt="">
         </div>
         <input [(ngModel)]="currentInput" (input)="searchForUser()" class="search-bar" type="text" name="" id="" placeholder="Search for users">
         <div class="results">
-            <div class="user" *ngFor="let user of users">
+            <div class="user" *ngFor="let user of users" (click)="addUser(user)">
                 <div class="container">
                     <div class="img-container">
                         <img src="/assets/user.png" class="user-img" alt="">

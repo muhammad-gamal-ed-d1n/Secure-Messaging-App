@@ -4,7 +4,6 @@ import { UserService } from '../service/user.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
-@Injectable()
 @Component({
   selector: 'app-add-chat-component',
   imports: [FormsModule, CommonModule],
@@ -14,7 +13,7 @@ import { CommonModule } from '@angular/common';
 export class AddChatComponent {
 
   @Output() closeSearchSignal = new EventEmitter<void>()
-
+  @Output() currentChat = new EventEmitter<User>();
   currentInput: string = "";
 
   constructor(
@@ -43,5 +42,15 @@ export class AddChatComponent {
 
   closeModal() {
     this.closeSearchSignal.emit()
+  }
+  outsideClick(event: MouseEvent) {
+    // make sure the click is outside the modal
+    if ((<HTMLElement>event.target).classList.contains('modal-container')) {
+      this.closeModal();
+    }
+  }
+  addUser(user: User) {
+    this.currentChat.emit(user);
+    this.closeModal();
   }
 }

@@ -62,7 +62,7 @@ export class ChatInterface {
   }
 
   fetchMessages(): void {
-    if(this.currentUser && this.currentChat && this.currentChat.otherUsername){
+    if(this.currentUser && this.currentChat && this.currentChat.otherUsername ){
       this.chatService.getMessages(this.currentUser.id,this.currentChat.otherUsername).subscribe({
         next: (res) => {
           this.messages = res;
@@ -76,7 +76,9 @@ export class ChatInterface {
     }
   }
   sendMessage(){
-    if(this.currentUser && this.currentChat && this.currentChat.otherUsername && this.messages.length > 0){
+    if(this.currentUser && this.currentChat && this.currentChat.otherUsername && this.messagecontent.length>0 ){
+      console.log("did we make it this time");
+      
     this.chatService.sendMessage(this.currentUser.id,this.currentChat.otherUsername,this.messagecontent).subscribe({
       next: (res) => {
         this.messages.push(res);
@@ -104,5 +106,13 @@ export class ChatInterface {
 
   getOtherUsername(chat: Chat) {
     return chat.users.filter(u => u.username !== this.currentUser.username)[0].username;
+  }
+  setCurrentChat(user: User) {
+    //make a mock chat object that will be discarded if no messages are sent
+    this.currentChat = {
+      id: -1,
+      users: [this.currentUser, user],
+      otherUsername: user.username,
+    };
   }
 }

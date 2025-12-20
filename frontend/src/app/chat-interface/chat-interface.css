@@ -499,3 +499,34 @@ chat-menu.active {
   height: 100%;
   gap:15px;
 }
+/* Base message positioning */
+.message-recived {
+  position: relative;
+  padding-right: 26px; /* space for status */
+}
+
+/* 1️⃣ Pending (default: not yet sent) */
+.message-recived::after {
+  content: "…";
+  position: absolute;
+  bottom: 4px;
+  right: 6px;
+  font-size: 12px;
+  color: #999;
+}
+
+/* 2️⃣ Sent */
+.message-sent::after {
+  content: "✔";
+  color: gray;
+}
+
+/* 3️⃣ Received */
+.message-received::after {
+  content: "✔✔";
+  color: gray;
+}/* 3️⃣ Received */
+.message-read::after {
+  content: "✔✔";
+  color: green;
+}
