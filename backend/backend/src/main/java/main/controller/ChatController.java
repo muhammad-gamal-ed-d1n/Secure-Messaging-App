@@ -37,13 +37,8 @@ public class ChatController {
 
     @GetMapping("/myChats")
     public ResponseEntity<List<ChatDto>> getByUserId(@AuthenticationPrincipal User user) {
-        // 1. Fetch the chats
         List<Chat> chats = chatService.findByUserId(user.getId());
-
-        // 2. IMPORTANT: Update the database so these messages are marked as Read/Received
-        for (Chat chat : chats) {
-            messageRepo.markMessageAsRecived(chat.getId(), user.getId());
-        }
+        messageRepo.markMessageAsRecived(user.getId());
 
         // 3. Convert to DTOs for the Frontend
         List<ChatDto> chatDtos = chats.stream()
