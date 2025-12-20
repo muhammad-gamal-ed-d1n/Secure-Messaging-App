@@ -16,14 +16,13 @@ public class MessageDto implements Serializable {
     private Long chatId;
     private Long senderId;
     private LocalDateTime timeStamp;
-    private boolean received;
-
+    private String state;
     public MessageDto(Message message) {
         this.id = message.getId();
         this.content = message.getContent();
         this.timeStamp = message.getTimeStamp();
         this.chatId = message.getChat().getId();
         this.senderId = message.getSender().getId();
-        this.received = false;
+        this.state ="NotRead";
     }
 }

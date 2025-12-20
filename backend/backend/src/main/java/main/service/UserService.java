@@ -18,9 +18,9 @@ public class UserService {
     @Autowired
     private UserRepo userRepo;
 
-//    @PostConstruct
-//    public void init() {
-//       create("mohamed", "pass1");
+   @PostConstruct
+    public void init() {
+       create("mohamed", "pass1");
 //       create("mohammad", "pass2");
 //        create("mohamad", "pass3");
 //        create("mohammed", "pass4");
@@ -34,9 +34,9 @@ public class UserService {
 //        create("mohannad", "pass12");
 //        create("mohab", "pass13");
 //        create("mohib", "pass14");
-//        create("mona", "pass15");
+        create("mona", "pass15");
 //        create("monir", "pass16");
-//     }
+     }
 
     private void create(String username, String password) {
         User user = new User();

@@ -35,4 +35,6 @@ public class Message implements Serializable {
     @JsonIgnoreProperties("messages")
     private Chat chat;
 
+    private String state = "NotRead";
+
 }

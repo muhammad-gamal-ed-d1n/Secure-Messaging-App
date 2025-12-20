@@ -13,7 +13,6 @@ import java.util.Optional;
 @Repository
 public interface ChatRepo extends JpaRepository<Chat, Long> {
     List<Chat> findByUsers_Id(Long userId);
-
     @Query("""
         SELECT c FROM Chat c
         JOIN c.users u 

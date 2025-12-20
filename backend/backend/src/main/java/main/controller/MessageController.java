@@ -3,6 +3,7 @@ package main.controller;
 import main.dto.MessageDto;
 import main.dto.SendMessageDto;
 import main.model.Message;
+import main.repo.MessageRepo;
 import main.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,8 @@ import java.util.List;
 public class MessageController {
     @Autowired
     private MessageService messageService;
+    @Autowired
+    private MessageRepo messageRepo;
 
     @PostMapping("/create")
     public ResponseEntity<Message> createMessage(@RequestBody SendMessageDto dto) {
@@ -36,5 +39,10 @@ public class MessageController {
                                                                @RequestParam("otherUsername")String otheruser){
         List<MessageDto> messages = messageService.getMyMessages(id,otheruser);
         return ResponseEntity.ok(messages);
+    }
+    @PutMapping("/state")
+    public ResponseEntity<Void> readMessages(@RequestParam("userId") Long userId, @RequestParam("chatId") Long chatId) {
+        messageRepo.markMessagesAsRead(chatId, userId);
+        return ResponseEntity.noContent().build();
     }
 }
