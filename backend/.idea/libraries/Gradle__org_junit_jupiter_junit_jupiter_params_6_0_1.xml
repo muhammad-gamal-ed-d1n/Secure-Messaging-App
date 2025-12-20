@@ -4,7 +4,11 @@
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.junit.jupiter/junit-jupiter-params/6.0.1/5c817a9421231ced101d19a699d5c99b992675/junit-jupiter-params-6.0.1.jar!/" />
     </CLASSES>
-    <JAVADOC />
-    <SOURCES />
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.junit.jupiter/junit-jupiter-params/6.0.1/649c4e3a8a6942de7b8caeffa43076bc2cc4298/junit-jupiter-params-6.0.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.junit.jupiter/junit-jupiter-params/6.0.1/a6206dc24b2b9da3e090d199b738df4bfd4326aa/junit-jupiter-params-6.0.1-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>

@@ -4,7 +4,11 @@
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-http-converter/4.0.0/1fde20003c5fa88ac3feecbfa315b0ab3cc53b0c/spring-boot-http-converter-4.0.0.jar!/" />
     </CLASSES>
-    <JAVADOC />
-    <SOURCES />
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-http-converter/4.0.0/e5c465213fe4087828e349880b11e826d68fbb2c/spring-boot-http-converter-4.0.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-http-converter/4.0.0/b385cebb1699ec3c478e320c3615f929d43a3ec7/spring-boot-http-converter-4.0.0-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>

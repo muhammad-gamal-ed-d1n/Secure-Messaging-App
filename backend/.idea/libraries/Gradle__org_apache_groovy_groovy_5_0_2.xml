@@ -4,7 +4,11 @@
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.groovy/groovy/5.0.2/53d7b394c0af4828e0119655aa84aabd87a0945c/groovy-5.0.2.jar!/" />
     </CLASSES>
-    <JAVADOC />
-    <SOURCES />
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.groovy/groovy/5.0.2/6b52055632b40a64618858aa8eac4787c6dbdc15/groovy-5.0.2-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.groovy/groovy/5.0.2/e06780565855df137967798dd46ce153bf03a7c8/groovy-5.0.2-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>

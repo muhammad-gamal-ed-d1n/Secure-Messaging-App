@@ -4,7 +4,11 @@
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-hibernate/4.0.0/f7d3969e5149722daa273d10dff0dd7f6eb0a550/spring-boot-hibernate-4.0.0.jar!/" />
     </CLASSES>
-    <JAVADOC />
-    <SOURCES />
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-hibernate/4.0.0/8867d16de43ea9987c95614ec29747fc52d5f17c/spring-boot-hibernate-4.0.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-hibernate/4.0.0/fb3de59d09e4fbbabdc6b44a6510bebc550d4d31/spring-boot-hibernate-4.0.0-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>

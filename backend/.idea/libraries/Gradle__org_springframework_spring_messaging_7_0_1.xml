@@ -4,7 +4,11 @@
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-messaging/7.0.1/b9ef33e77ce94c8c617aef338a5e1186ca6afae7/spring-messaging-7.0.1.jar!/" />
     </CLASSES>
-    <JAVADOC />
-    <SOURCES />
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-messaging/7.0.1/cae27ce3aee33f333d33233012d6dfed1c1c2da2/spring-messaging-7.0.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-messaging/7.0.1/2c6572e3e87becee869d68eda5659885b6349a2a/spring-messaging-7.0.1-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>

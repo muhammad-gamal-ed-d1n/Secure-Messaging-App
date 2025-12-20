@@ -4,7 +4,11 @@
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mockito/mockito-junit-jupiter/5.20.0/58ed6603af5f8f53886d49be00264a3fdd1278d5/mockito-junit-jupiter-5.20.0.jar!/" />
     </CLASSES>
-    <JAVADOC />
-    <SOURCES />
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mockito/mockito-junit-jupiter/5.20.0/8154edc78ff5dec4b757f206bfdd67c7f202ad8/mockito-junit-jupiter-5.20.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mockito/mockito-junit-jupiter/5.20.0/b809e85db1800c2f00abbcb6249851b67a32edad/mockito-junit-jupiter-5.20.0-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>

@@ -4,7 +4,11 @@
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-tx/7.0.1/61bae82733eec52847a6e0565898e00c2fe829a8/spring-tx-7.0.1.jar!/" />
     </CLASSES>
-    <JAVADOC />
-    <SOURCES />
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-tx/7.0.1/251e3c902f94e9c4eac972b4db1d3e373197b4da/spring-tx-7.0.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-tx/7.0.1/38f60d524be10c554680c889133bdaa696c5e8a1/spring-tx-7.0.1-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>

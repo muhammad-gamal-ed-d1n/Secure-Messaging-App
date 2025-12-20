@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, Injectable, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Output,AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import { User } from '../model/User';
 import { UserService } from '../service/user.service';
 import { FormsModule } from '@angular/forms';
@@ -11,6 +11,11 @@ import { CommonModule } from '@angular/common';
   styleUrl: './add-chat-component.css',
 })
 export class AddChatComponent {
+  @ViewChild('myInput') myInput!: ElementRef<HTMLInputElement>;
+
+  ngAfterViewInit(): void {
+    this.myInput.nativeElement.focus();
+  }
 
   @Output() closeSearchSignal = new EventEmitter<void>()
   @Output() currentChat = new EventEmitter<User>();

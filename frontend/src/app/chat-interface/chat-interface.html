@@ -29,9 +29,10 @@
           <div class="search-img-container">
             <img src="/assets/search.png" class="search-img" alt="">
           </div>
-          <input placeholder="Search Chats" class="search-bar" type="search">
+          <input (input)="searchChats($event.target.value)" placeholder="Search Chats" class="search-bar" type="search">
         </div>
       </div>
+
       <div id="encryptionService" class="encryption-service-container" [class.active]="activeView() == 'service'">
         <div class="encryption-service">
           <div class="encrypt-decrypt">
@@ -50,7 +51,7 @@
 
       <div class="chat-menu" id="chatMenu">
 
-        <div *ngFor="let chat of chats">
+        <div *ngFor="let chat of filteredChats" title="View chat">
           <div (click)="currentChat = chat; fetchMessages()" class="chat">
             <div class="profile-img-container">
               <img class="profile-img" src="/assets/user.png" alt="">
@@ -69,7 +70,15 @@
         </div>
 
       </div>
-
+      <div class="controllers">
+        <button class="logout" (click)="logout()">logout</button>
+        <div class="chat-menu-selector" id="selectChatMenu" (click)="openMenu()">
+          <img class="chat-menu-img" src="/assets/chat(1).png" alt="">
+        </div>
+        <div class="encryption-service-selector" id="selectService" (click)="openService()">
+          <img class="encryption-service-img" src="/assets/data-encryption.png" alt="">
+        </div>
+      </div>
     </section>
 
 
@@ -80,14 +89,14 @@
           <div class="chat-bar">
 
             <div class="profile-img-container">
-              <img class="profile-img" src="/assets/user.png" alt="">
+              <img class="profile-img" src="/assets/user.png" alt="profile-img">
               <h3 class="username">
                 {{ currentChat.otherUsername }}
               </h3>
             </div>
             <div class="chat-bar-right">
               <div class="chat-settings-img-container">
-                <img (click)="currentChat = null" class="chat-settings-img" src="/assets/back.png" alt="">
+                <img (click)="currentChat = null" class="chat-settings-img" src="/assets/back.png" alt="close" title="close chat">
               </div>
             </div>
           </div>
@@ -102,24 +111,13 @@
           }
           </div>
           <div class="chat-input-bar">
-            <input type="text" class="chat-input" placeholder="Type a message..." name="message" [(ngModel)]="messagecontent">
-            <div class="send-btn" (click)="sendMessage()">
-              <img src="/assets/send.png" class="send-img" alt="">
+            <input type="text" (keydown.enter)="sendMessage()" class="chat-input" placeholder="Type a message..." name="message" [(ngModel)]="messagecontent">
+            <div class="send-btn" (click)="sendMessage()" title="send">
+              <img src="/assets/send.png" class="send-img" alt="send">
             </div>
           </div>
         </div>
 
-      </div>
-
-
-      <div class="right-tab">
-        <button class="logout" (click)="logout()">logout</button>
-        <div class="chat-menu-selector" id="selectChatMenu" (click)="openMenu()">
-          <img class="chat-menu-img" src="/assets/chat(1).png" alt="">
-        </div>
-        <div class="encryption-service-selector" id="selectService" (click)="openService()">
-          <img class="encryption-service-img" src="/assets/data-encryption.png" alt="">
-        </div>
       </div>
     </div>
   </div>

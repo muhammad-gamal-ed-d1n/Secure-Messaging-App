@@ -4,7 +4,11 @@
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-aspects/7.0.1/f7ff5961bc05b2758b10b984a1ccfc468e58e5d6/spring-aspects-7.0.1.jar!/" />
     </CLASSES>
-    <JAVADOC />
-    <SOURCES />
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-aspects/7.0.1/924e70afc9a49019a42169872c55fd13af637c1d/spring-aspects-7.0.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-aspects/7.0.1/51e490d46a5b0054db7f4fe838aa07fa5ff309be/spring-aspects-7.0.1-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>
