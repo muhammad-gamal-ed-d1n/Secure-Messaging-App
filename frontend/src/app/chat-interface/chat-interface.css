@@ -473,7 +473,7 @@ chat-menu.active {
   object-fit: contain;
   filter: invert(100%); /* makes white icon on black button */
 }
-.message-received{
+.text-message{
   display: flex;
   width: 100%;
   justify-content: start;
@@ -482,13 +482,13 @@ chat-menu.active {
   margin-top: 20px;
   margin-bottom: 10px;
 }
-.message-received span, .message-sent span{
+.text-message span, .message-sent span{
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.4);
   padding: 10px;
   border-radius: 10px;
 }
 
-.message-received span {
+.text-message span {
   border:2px solid #727c74;
 }
 

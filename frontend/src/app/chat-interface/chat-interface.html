@@ -1,64 +1,84 @@
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet" href="chat-interface.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="chat-interface.css" />
   <title>App</title>
 </head>
 
 <body>
-  <app-add-chat-component (currentChat)="setCurrentChat($event)" (closeSearchSignal)="displaySearch=false" *ngIf="displaySearch"></app-add-chat-component>
+  <app-add-chat-component
+    (currentChat)="setCurrentChat($event)"
+    (closeSearchSignal)="displaySearch = false"
+    *ngIf="displaySearch"
+  ></app-add-chat-component>
   <div class="container">
     <section class="left-tab">
       <div class="inner-tab">
         <div class="top">
           <div class="title">
             <div class="logo-container">
-              <img class="logo" src="/assets/encrypt.png" alt="">
+              <img class="logo" src="/assets/encrypt.png" alt="" />
             </div>
             <div class="name">Concypher</div>
           </div>
           <div class="add-chat">
-            <img (click)="displaySearch=true" class="add-chat-img" src="/assets/new-message.png" alt="" title="create new chat">
+            <img
+              (click)="displaySearch = true"
+              class="add-chat-img"
+              src="/assets/new-message.png"
+              alt=""
+              title="create new chat"
+            />
           </div>
         </div>
         <div class="search-container">
           <div class="search-img-container">
-            <img src="/assets/search.png" class="search-img" alt="">
+            <img src="/assets/search.png" class="search-img" alt="" />
           </div>
-          <input (input)="searchChats($event.target.value)" placeholder="Search Chats" class="search-bar" type="search">
+          <input
+            (input)="searchChats($event.target.value)"
+            placeholder="Search Chats"
+            class="search-bar"
+            type="search"
+          />
         </div>
       </div>
 
-      <div id="encryptionService" class="encryption-service-container" [class.active]="activeView() == 'service'">
+      <div
+        id="encryptionService"
+        class="encryption-service-container"
+        [class.active]="activeView() == 'service'"
+      >
         <div class="encryption-service">
           <div class="encrypt-decrypt">
             <div id="encrypt" class="encrypt">Encrypt</div>
             <div id="decrypt" class="decrypt">Decrypt</div>
           </div>
           <div class="parameters">
-            <h4 style="margin-bottom: 2px;">Public Key:</h4>
-            <input class="key" type="text">
-            <h4 style="margin-bottom: 2px;">Message:</h4>
-            <input class="message" type="text">
+            <h4 style="margin-bottom: 2px">Public Key:</h4>
+            <input class="key" type="text" />
+            <h4 style="margin-bottom: 2px">Message:</h4>
+            <input class="message" type="text" />
             <div class="encrypt-message">encrypt message</div>
           </div>
         </div>
       </div>
 
       <div class="chat-menu" id="chatMenu">
-
         <div *ngFor="let chat of filteredChats" title="View chat">
           <div (click)="currentChat = chat; fetchMessages()" class="chat">
             <div class="profile-img-container">
-              <img class="profile-img" src="/assets/user.png" alt="">
+              <img class="profile-img" src="/assets/user.png" alt="" />
             </div>
             <div class="chat-details">
               <div class="top-details">
-                <div class="chat-name"> {{ chat.otherUsername }} </div>
+                <div class="chat-name">{{ chat.otherUsername }}</div>
                 <div class="message-time">10:42am</div>
               </div>
               <div class="bottom-details">
@@ -68,56 +88,71 @@
             </div>
           </div>
         </div>
-
       </div>
       <div class="controllers">
         <button class="logout" (click)="logout()">logout</button>
         <div class="chat-menu-selector" id="selectChatMenu" (click)="openMenu()">
-          <img class="chat-menu-img" src="/assets/chat(1).png" alt="">
+          <img class="chat-menu-img" src="/assets/chat(1).png" alt="" />
         </div>
         <div class="encryption-service-selector" id="selectService" (click)="openService()">
-          <img class="encryption-service-img" src="/assets/data-encryption.png" alt="">
+          <img class="encryption-service-img" src="/assets/data-encryption.png" alt="" />
         </div>
       </div>
     </section>
 
-
     <div class="warapper">
-
       <div class="chat-area">
         <div *ngIf="currentChat" class="chat-area">
           <div class="chat-bar">
-
             <div class="profile-img-container">
-              <img class="profile-img" src="/assets/user.png" alt="profile-img">
+              <img class="profile-img" src="/assets/user.png" alt="profile-img" />
               <h3 class="username">
                 {{ currentChat.otherUsername }}
               </h3>
             </div>
             <div class="chat-bar-right">
               <div class="chat-settings-img-container">
-                <img (click)="currentChat = null" class="chat-settings-img" src="/assets/back.png" alt="close" title="close chat">
+                <img
+                  (click)="currentChat = null"
+                  class="chat-settings-img"
+                  src="/assets/back.png"
+                  alt="close"
+                  title="close chat"
+                />
               </div>
             </div>
           </div>
           <div class="messages-container">
-          @for(item of messages ; track $index){
-            <div class="message-recived" [ngClass]="{
-      'message-received': item.received,
-      'message-read': item.read,
-      'message-sent': !item.received}">
-             <span> {{ item.content }}</span>
+            @for (item of messages; track $index) {
+            <div
+              class="text-message"
+              [ngClass]="{
+                'message-not-read': item.senderId == currentUser.id && item.state === 'NotRead',
+                'message-received': item.senderId == currentUser.id && item.state === 'Recieved',
+                'message-read': item.senderId == currentUser.id && item.state === 'read',
+                'message-sent': item.senderId == currentUser.id
+              }"
+              role="article"
+            >
+              <span>{{ item.content }}</span>
             </div>
-          }
+            }
           </div>
+
           <div class="chat-input-bar">
-            <input type="text" (keydown.enter)="sendMessage()" class="chat-input" placeholder="Type a message..." name="message" [(ngModel)]="messagecontent">
+            <input
+              type="text"
+              (keydown.enter)="sendMessage()"
+              class="chat-input"
+              placeholder="Type a message..."
+              name="message"
+              [(ngModel)]="messagecontent"
+            />
             <div class="send-btn" (click)="sendMessage()" title="send">
-              <img src="/assets/send.png" class="send-img" alt="send">
+              <img src="/assets/send.png" class="send-img" alt="send" />
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </div>

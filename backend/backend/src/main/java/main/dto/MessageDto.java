@@ -23,6 +23,6 @@ public class MessageDto implements Serializable {
         this.timeStamp = message.getTimeStamp();
         this.chatId = message.getChat().getId();
         this.senderId = message.getSender().getId();
-        this.state ="NotRead";
+        this.state = message.getState();
     }
 }
