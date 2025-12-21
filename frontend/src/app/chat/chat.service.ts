@@ -19,6 +19,8 @@ export class ChatService {
     return this.http.get<Message[]>("http://localhost:8080/api/message/allmessages",{params:params});
   }
   sendMessage(senderId: number,recipient:string, message: string) {
+    const token = localStorage.getItem('token');
+    const headers = { 'Authorization': `Bearer ${token}` };
     const payload={
       senderId:senderId,
       recipient_username:recipient,

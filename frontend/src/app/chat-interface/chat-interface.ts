@@ -47,7 +47,7 @@ export class ChatInterface {
     this.authService.getCurrentUser().subscribe({
       next: (curr: User) => {
         this.currentUser = curr;
-        this.webSocketService.connect();
+        this.webSocketService.connect(this.currentUser);
         this.webSocketService.connectionStatus$.subscribe(isConnected => {
 
           if (isConnected) {
@@ -109,7 +109,7 @@ export class ChatInterface {
     if (this.currentUser && this.currentChat && this.currentChat.otherUsername && this.messagecontent.length>0) {
       const messageDto = {
         senderId: this.currentUser.id,
-        receiverUsername: this.currentChat.otherUsername,
+        recipientUsername: this.currentChat.otherUsername,
         content: this.messagecontent,
         type: 'CHAT'
       };
@@ -147,16 +147,20 @@ export class ChatInterface {
   }
 
   updateUserStatus(userId: number, statusType: string) {
-    const chat = this.chats.find(c => c.users.some(u => u.id === userId));
-    if (chat) {
-      chat.isOnline = (statusType === 'JOIN');
-    }
-    if (this.currentChat && this.currentChat.users.some(u => u.id === userId)) {
+    const targetId = Number(userId);
+    console.log(`Updating status for user ${targetId} to ${statusType}`);
+
+    this.chats.forEach(chat => {
+      if (chat.users.some(u => Number(u.id) === targetId)) {
+        chat.isOnline = (statusType === 'JOIN');
+      }
+    });
+    if (this.currentChat && this.currentChat.users.some(u => Number(u.id) === targetId)) {
       this.currentChat.isOnline = (statusType === 'JOIN');
     }
     this.cdr.detectChanges();
   }
-  
+
   setCurrentChat(user: User) {
     //make a mock chat object that will be discarded if no messages are sent
     this.currentChat = {

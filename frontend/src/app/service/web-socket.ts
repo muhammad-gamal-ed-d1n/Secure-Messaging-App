@@ -12,23 +12,21 @@ export class WebSocketService {
 
   constructor() { }
 
-  connect() {
+  connect(user: any) {
     const socket = new SockJS('/ws');
     this.stompClient = Stomp.over(() => socket);
 
     this.stompClient.connect({}, (frame: any) => {
-        console.log('Connected: ' + frame);
-        this.connectionStatus$.next(true);
-        this.sendJoinNotification();
+      this.connectionStatus$.next(true);
+      this.sendJoinNotification(user);
     }, (error: any) => {
-        console.error('Connection error: ', error);
-        this.connectionStatus$.next(false);
+      this.connectionStatus$.next(false);
     });
-}
+  }
 
   subscribeToPrivateMessages(username: string, callback: (msg: any) => void) {
     // match the destination with the backend configuration
-    this.stompClient.subscribe(`/user/${username}/queue/messages`, (payload: any) => {
+    this.stompClient.subscribe(`/user/queue/messages`, (payload: any) => {
       callback(JSON.parse(payload.body));
     });
   }
@@ -46,13 +44,18 @@ export class WebSocketService {
   }
 
   // Notify server of user joining
-  private sendJoinNotification() {
+  private sendJoinNotification(user: any) {
     const currentUser = JSON.parse(localStorage.getItem('user') || '{}');
-    const joinMessage = {
-      senderId: currentUser.id,
-      senderName: currentUser.username,
-      type: 'JOIN'
-    };
-    this.stompClient.send('/app/chat.addUser', {}, JSON.stringify(joinMessage));
+
+    if (user && user.id) {
+      console.log(`Sending join notification for user: ${user.username}`);
+      const joinMessage = {
+        senderId: user.id,
+        type: 'JOIN'
+      };
+      this.stompClient.send('/app/chat.addUser', {}, JSON.stringify(joinMessage));
+    } else {
+      console.error("Could not send Join notification: User data is missing!");
+    }
   }
 }

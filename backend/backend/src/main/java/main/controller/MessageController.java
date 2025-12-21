@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
-import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -69,12 +68,11 @@ public class MessageController {
     }
 
     @MessageMapping("/chat.addUser")
-    @SendTo("/topic/public")
     public MessageDto addUser(@Payload MessageDto messageDto, SimpMessageHeaderAccessor headerAccessor) {
         headerAccessor.getSessionAttributes().put("userId", messageDto.getSenderId());
 
         messageDto.setType(main.model.MessageType.JOIN);
-        messagingTemplate.convertAndSend("/topic/public", messageDto);
+        messagingTemplate.convertAndSend("/topic/status", messageDto);
         
         return messageDto;
     }
