@@ -26,7 +26,27 @@ body{
   max-width: 350px;
   z-index: 100;
   transition:width 0.3s;
+  height: 100%;
 }
+.controllers {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  background: inherit; /* or a color */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  width: 300px;
+}
+.controllers img {
+  width: 30px;
+  height: 30px;
+  margin: 10px;
+  cursor: pointer;
+}
+
 .warapper {
   margin-left: 300px;
   width: calc(100% - 300px);
@@ -202,18 +222,6 @@ chat-menu.active {
   height: 25px;
   text-align: center;
   border-radius: 50%;
-}
-
-.right-tab {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 60px;
-  flex-shrink: 0;
-  box-shadow: 0.5px 0px 7px rgba(0, 0, 0, 0.6);
-  border-left: 1px solid gainsboro;
-  border-radius: 15px;
 }
 
 .encryption-service-selector {
@@ -532,3 +540,34 @@ chat-menu.active {
 
 .online { background-color: #4CAF50; }
 .offline { background-color: #bbb; }
+/* Base message positioning */
+.message-recived {
+  position: relative;
+  padding-right: 26px; /* space for status */
+}
+
+/* 1️⃣ Pending (default: not yet sent) */
+.message-recived::after {
+  content: "…";
+  position: absolute;
+  bottom: 4px;
+  right: 6px;
+  font-size: 12px;
+  color: #999;
+}
+
+/* 2️⃣ Sent */
+.message-sent::after {
+  content: "✔";
+  color: gray;
+}
+
+/* 3️⃣ Received */
+.message-received::after {
+  content: "✔✔";
+  color: gray;
+}/* 3️⃣ Received */
+.message-read::after {
+  content: "✔✔";
+  color: green;
+}

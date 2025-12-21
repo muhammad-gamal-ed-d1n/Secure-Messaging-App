@@ -23,6 +23,7 @@ public class MessageDto implements Serializable {
     private boolean received;
     private MessageType type;
 
+    private String state;
     public MessageDto(Message message) {
         this.id = message.getId();
         this.content = message.getContent();
@@ -32,5 +33,6 @@ public class MessageDto implements Serializable {
         this.recipientUsername = message.getRecipient().getUsername();
         this.type = MessageType.CHAT;
         this.received = false;
+        this.state ="NotRead";
     }
 }

@@ -37,4 +37,6 @@ public class Message implements Serializable {
 
     @Enumerated(EnumType.STRING)
     private MessageType type;
+    private String state = "NotRead";
+
 }

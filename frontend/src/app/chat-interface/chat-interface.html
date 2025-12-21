@@ -10,9 +10,9 @@
 </head>
 
 <body>
-  <app-add-chat-component (closeSearchSignal)="displaySearch=false" *ngIf="displaySearch"></app-add-chat-component>
+  <app-add-chat-component (currentChat)="setCurrentChat($event)" (closeSearchSignal)="displaySearch=false" *ngIf="displaySearch"></app-add-chat-component>
   <div class="container">
-    <div class="left-tab">
+    <section class="left-tab">
       <div class="inner-tab">
         <div class="top">
           <div class="title">
@@ -22,14 +22,14 @@
             <div class="name">Concypher</div>
           </div>
           <div class="add-chat">
-            <img (click)="displaySearch=true" class="add-chat-img" src="/assets/new-message.png" alt="">
+            <img (click)="displaySearch=true" class="add-chat-img" src="/assets/new-message.png" alt="" title="create new chat">
           </div>
         </div>
         <div class="search-container">
           <div class="search-img-container">
             <img src="/assets/search.png" class="search-img" alt="">
           </div>
-          <input placeholder="Search Chats" class="search-bar" type="search">
+          <input (input)="searchChats($event.target.value)" placeholder="Search Chats" class="search-bar" type="search">
         </div>
       </div>
 
@@ -51,7 +51,7 @@
 
       <div class="chat-menu" id="chatMenu">
 
-        <div *ngFor="let chat of chats">
+        <div *ngFor="let chat of filteredChats" title="View chat">
           <div (click)="currentChat = chat; fetchMessages()" class="chat">
             <div class="profile-img-container">
               <img class="profile-img" src="/assets/user.png" alt="">
@@ -70,8 +70,16 @@
         </div>
 
       </div>
-
-    </div>
+      <div class="controllers">
+        <button class="logout" (click)="logout()">logout</button>
+        <div class="chat-menu-selector" id="selectChatMenu" (click)="openMenu()">
+          <img class="chat-menu-img" src="/assets/chat(1).png" alt="">
+        </div>
+        <div class="encryption-service-selector" id="selectService" (click)="openService()">
+          <img class="encryption-service-img" src="/assets/data-encryption.png" alt="">
+        </div>
+      </div>
+    </section>
 
 
     <div class="warapper">
@@ -95,7 +103,7 @@
 
             <div class="chat-bar-right">
               <div class="chat-settings-img-container">
-                <img (click)="currentChat = null" class="chat-settings-img" src="/assets/back.png" alt="">
+                <img (click)="currentChat = null" class="chat-settings-img" src="/assets/back.png" alt="close" title="close chat">
               </div>
             </div>
           </div>
@@ -103,30 +111,20 @@
           @for(item of messages ; track $index){
             <div class="message-recived" [ngClass]="{
       'message-received': item.received,
+      'message-read': item.read,
       'message-sent': !item.received}">
              <span> {{ item.content }}</span>
             </div>
           }
           </div>
           <div class="chat-input-bar">
-            <input type="text" class="chat-input" placeholder="Type a message..." name="message" [(ngModel)]="messagecontent">
-            <div class="send-btn" (click)="sendMessage()">
-              <img src="/assets/send.png" class="send-img" alt="">
+            <input type="text" (keydown.enter)="sendMessage()" class="chat-input" placeholder="Type a message..." name="message" [(ngModel)]="messagecontent">
+            <div class="send-btn" (click)="sendMessage()" title="send">
+              <img src="/assets/send.png" class="send-img" alt="send">
             </div>
           </div>
         </div>
 
-      </div>
-
-
-      <div class="right-tab">
-        <button class="logout" (click)="logout()">logout</button>
-        <div class="chat-menu-selector" id="selectChatMenu" (click)="openMenu()">
-          <img class="chat-menu-img" src="/assets/chat(1).png" alt="">
-        </div>
-        <div class="encryption-service-selector" id="selectService" (click)="openService()">
-          <img class="encryption-service-img" src="/assets/data-encryption.png" alt="">
-        </div>
       </div>
     </div>
   </div>

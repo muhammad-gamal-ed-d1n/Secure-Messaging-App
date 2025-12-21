@@ -4,7 +4,11 @@
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-websocket-test/4.0.0/6d6a0ace0c7913854ddef82c0d9b399d6dd99f44/spring-boot-starter-websocket-test-4.0.0.jar!/" />
     </CLASSES>
-    <JAVADOC />
-    <SOURCES />
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-websocket-test/4.0.0/6d6a0ace0c7913854ddef82c0d9b399d6dd99f44/spring-boot-starter-websocket-test-4.0.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-websocket-test/4.0.0/6d6a0ace0c7913854ddef82c0d9b399d6dd99f44/spring-boot-starter-websocket-test-4.0.0-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>

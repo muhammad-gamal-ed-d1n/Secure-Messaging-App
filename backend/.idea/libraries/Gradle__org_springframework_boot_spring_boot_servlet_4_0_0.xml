@@ -4,7 +4,11 @@
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-servlet/4.0.0/c7b38fa78af0c018827bd389d207f5bb38e4e019/spring-boot-servlet-4.0.0.jar!/" />
     </CLASSES>
-    <JAVADOC />
-    <SOURCES />
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-servlet/4.0.0/9c0ef029fa80ff4e5bcabf677f8c64d84e5a47fc/spring-boot-servlet-4.0.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-servlet/4.0.0/5719bc3212947361f7ea0de36e7a4bb6da295215/spring-boot-servlet-4.0.0-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>

@@ -4,7 +4,11 @@
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-data-jpa/4.0.0/99a0eca30d43367252c47da3487d73eeb8348de9/spring-boot-starter-data-jpa-4.0.0.jar!/" />
     </CLASSES>
-    <JAVADOC />
-    <SOURCES />
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-data-jpa/4.0.0/99a0eca30d43367252c47da3487d73eeb8348de9/spring-boot-starter-data-jpa-4.0.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-data-jpa/4.0.0/99a0eca30d43367252c47da3487d73eeb8348de9/spring-boot-starter-data-jpa-4.0.0-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>

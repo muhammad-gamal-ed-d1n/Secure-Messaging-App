@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import main.dto.MessageDto;
 import main.dto.SendMessageDto;
 import main.model.Message;
+import main.repo.MessageRepo;
 import main.service.MessageService;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -31,6 +33,8 @@ public class MessageController {
 
     @Autowired
     private MessageService messageService;
+    @Autowired
+    private MessageRepo messageRepo;
 
     @PostMapping("/create")
     public ResponseEntity<Message> createMessage(@RequestBody SendMessageDto dto) {
@@ -73,5 +77,11 @@ public class MessageController {
         messagingTemplate.convertAndSend("/topic/public", messageDto);
         
         return messageDto;
+    }
+    
+    @PutMapping("/state")
+    public ResponseEntity<Void> readMessages(@RequestParam("sender") String sender, @RequestParam("reciver") Long reciver) {
+        messageRepo.markMessagesAsRead(sender,reciver);
+        return ResponseEntity.noContent().build();
     }
 }

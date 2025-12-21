@@ -6,10 +6,11 @@ import { Chat } from '../model/Chat';
 import { FormsModule } from "@angular/forms";
 import { CommonModule } from '@angular/common';
 import { ChatService } from '../chat/chat.service';
-import { HttpClient } from '@angular/common/http';
-import { Message } from '../model/Message';
-import { AddChatComponent } from "../add-chat-component/add-chat-component";
 import { WebSocketService } from '../service/web-socket';
+import {HttpClient, HttpParams} from '@angular/common/http';
+import {Message} from '../model/Message';
+import { AddChatComponent } from "../add-chat-component/add-chat-component";
+import { filter } from 'rxjs';
 
 @Injectable()
 @Component({
@@ -29,6 +30,7 @@ export class ChatInterface {
   displaySearch: boolean = false;
   messagecontent: string = '';
   chats!: Chat[];
+  filteredChats!: Chat[];
   currentUser!: User;
   currentChat?: Chat | null;
   messages: Message[] = [];
@@ -69,7 +71,9 @@ export class ChatInterface {
     this.chatService.getChats().subscribe({
       next: (res: Chat[]) => {
         this.chats = res;
-        for (let i = 0; i < this.chats.length; i++) {
+        this.filteredChats = this.chats;
+
+        for(let i = 0; i < this.chats.length; i++) {
           this.chats[i].otherUsername = this.getOtherUsername(this.chats[i]);
         }
         this.cdr.detectChanges();
@@ -92,11 +96,17 @@ export class ChatInterface {
           console.log("error fetching: " + err);
         }
       });
+     this.chatService.setRead(this.currentUser.id,this.currentChat.otherUsername).subscribe({
+       next: (res) => {
+       },
+       error: (err) => {
+       }
+     })
     }
   }
 
   sendMessage() {
-    if (this.currentUser && this.currentChat && this.currentChat.otherUsername) {
+    if (this.currentUser && this.currentChat && this.currentChat.otherUsername && this.messagecontent.length>0) {
       const messageDto = {
         senderId: this.currentUser.id,
         receiverUsername: this.currentChat.otherUsername,
@@ -144,6 +154,21 @@ export class ChatInterface {
     if (this.currentChat && this.currentChat.users.some(u => u.id === userId)) {
       this.currentChat.isOnline = (statusType === 'JOIN');
     }
+    this.cdr.detectChanges();
+  }
+  
+  setCurrentChat(user: User) {
+    //make a mock chat object that will be discarded if no messages are sent
+    this.currentChat = {
+      id: -1,
+      users: [this.currentUser, user],
+      otherUsername: user.username,
+    };
+  }
+  searchChats(searchInput: string) {
+    this.filteredChats = this.chats.filter(chat =>
+      chat.otherUsername.toLowerCase().includes(searchInput.toLowerCase())
+    );
     this.cdr.detectChanges();
   }
 }

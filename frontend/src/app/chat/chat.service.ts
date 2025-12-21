@@ -26,4 +26,8 @@ export class ChatService {
     }
     return this.http.post<Message>("http://localhost:8080/api/message/create", payload);
   }
+  setRead(id:number,other:string) {
+    let param = new HttpParams().set('sender', other).set('reciver', id);
+    return this.http.put("http://localhost:8080/api/message/state",null,{params:param})
+  };
 }

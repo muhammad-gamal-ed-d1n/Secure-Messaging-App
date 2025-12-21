@@ -4,7 +4,7 @@
     <output-test url="file://$MODULE_DIR$/../../backend/build/classes/java/test" />
     <exclude-output />
     <content url="file://$MODULE_DIR$/../../backend/src/test" />
-    <orderEntry type="jdk" jdkName="ms-21" jdkType="JavaSDK" />
+    <orderEntry type="jdk" jdkName="21" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="backend.main" />
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter-data-jpa-test:4.0.0" level="project" />

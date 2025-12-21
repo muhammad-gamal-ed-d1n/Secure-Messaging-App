@@ -4,7 +4,11 @@
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.hibernate.orm/hibernate-core/7.1.8.Final/57be444bca9f8a6091e9ed82c1cc14e57095664d/hibernate-core-7.1.8.Final.jar!/" />
     </CLASSES>
-    <JAVADOC />
-    <SOURCES />
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.hibernate.orm/hibernate-core/7.1.8.Final/9d6fffbb4996d8d94573251a8c529038de4bd5c0/hibernate-core-7.1.8.Final-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.hibernate.orm/hibernate-core/7.1.8.Final/7fa8bbfaad43cea8562e35aaac2416fd814232ea/hibernate-core-7.1.8.Final-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>

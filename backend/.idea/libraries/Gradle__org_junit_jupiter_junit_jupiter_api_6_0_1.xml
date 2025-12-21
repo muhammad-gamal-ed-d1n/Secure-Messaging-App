@@ -4,7 +4,11 @@
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.junit.jupiter/junit-jupiter-api/6.0.1/fd95c21739621a27658aada0ac23ff3d354beaa5/junit-jupiter-api-6.0.1.jar!/" />
     </CLASSES>
-    <JAVADOC />
-    <SOURCES />
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.junit.jupiter/junit-jupiter-api/6.0.1/3afbd23dd462fff6d31120a19ee1b6c10054556a/junit-jupiter-api-6.0.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.junit.jupiter/junit-jupiter-api/6.0.1/554fe6a5dce83d13bb9b7bb56c239a4c1f46a5e8/junit-jupiter-api-6.0.1-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>

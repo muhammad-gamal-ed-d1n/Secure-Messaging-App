@@ -4,7 +4,11 @@
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-webmvc/4.0.0/35fdec70f3a33fb7574c866cb02f1a5caab0b2b5/spring-boot-webmvc-4.0.0.jar!/" />
     </CLASSES>
-    <JAVADOC />
-    <SOURCES />
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-webmvc/4.0.0/bfc3196c291e3cb222702a9423011dd1b496edb9/spring-boot-webmvc-4.0.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-webmvc/4.0.0/8550bfbc4f05f50a0fbfd03a8d0d0e22baa753ee/spring-boot-webmvc-4.0.0-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>

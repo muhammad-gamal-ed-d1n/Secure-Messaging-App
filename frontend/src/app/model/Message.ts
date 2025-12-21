@@ -4,7 +4,8 @@ export class Message {
     timeStamp: string = "";
     chatId: number = 0;
     senderId: number = 0;
-  received:boolean = false;
+    received: boolean = false;
+    read: boolean = false;
 
     constructor(init?: Partial<Message>) {
         Object.assign(this, init);

@@ -4,7 +4,11 @@
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.junit.platform/junit-platform-launcher/6.0.1/9db4b5904c955cb1adb909de0e1b4793fe5c256d/junit-platform-launcher-6.0.1.jar!/" />
     </CLASSES>
-    <JAVADOC />
-    <SOURCES />
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.junit.platform/junit-platform-launcher/6.0.1/db03cd2aed2dd4fad7e302c2855f74643afdee66/junit-platform-launcher-6.0.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.junit.platform/junit-platform-launcher/6.0.1/38f984f53eb994da5fb309faee8b7c7b2bb3872/junit-platform-launcher-6.0.1-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>
