@@ -10,6 +10,7 @@ import {HttpClient} from '@angular/common/http';
 import {Message} from '../model/Message';
 import { AddChatComponent } from "../add-chat-component/add-chat-component";
 import { filter } from 'rxjs';
+import { EncryptionService } from "../encryption-service/encryption-service";
 
 @Injectable()
 @Component({
@@ -18,7 +19,8 @@ import { filter } from 'rxjs';
     RouterOutlet,
     FormsModule,
     CommonModule,
-    AddChatComponent
+    AddChatComponent,
+    EncryptionService
 ],
   templateUrl: './chat-interface.html',
   styleUrl: './chat-interface.css',

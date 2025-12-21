@@ -33,21 +33,7 @@
         </div>
       </div>
 
-      <div id="encryptionService" class="encryption-service-container" [class.active]="activeView() == 'service'">
-        <div class="encryption-service">
-          <div class="encrypt-decrypt">
-            <div id="encrypt" class="encrypt">Encrypt</div>
-            <div id="decrypt" class="decrypt">Decrypt</div>
-          </div>
-          <div class="parameters">
-            <h4 style="margin-bottom: 2px;">Public Key:</h4>
-            <input class="key" type="text">
-            <h4 style="margin-bottom: 2px;">Message:</h4>
-            <input class="message" type="text">
-            <div class="encrypt-message">encrypt message</div>
-          </div>
-        </div>
-      </div>
+      <app-encryption-service class="encryption-service-container" [class.active]="activeView() == 'service'"></app-encryption-service>
 
       <div class="chat-menu" id="chatMenu">
 
