@@ -1,5 +1,5 @@
-import { ChangeDetectorRef, Component, OnInit, signal } from '@angular/core';
-import { RouterOutlet, Router } from "@angular/router";
+import {ChangeDetectorRef, Component, ElementRef, Injectable, NgModule, signal, ViewChild, OnInit} from '@angular/core';
+import { Router, RouterOutlet } from "@angular/router";
 import { AuthService } from '../auth/auth service/AuthService';
 import { User } from '../model/User';
 import { Chat } from '../model/Chat';
@@ -26,6 +26,13 @@ import { filter } from 'rxjs';
 })
 export class ChatInterface implements OnInit {
   activeView = signal<'chat' | 'service'>('chat');
+  @ViewChild('scrollContainer') private myScrollContainer!: ElementRef;
+  scrollToBottom():void{
+    if(this.myScrollContainer){
+      const element = this.myScrollContainer.nativeElement;
+      element.scrollTop = element.scrollHeight;
+    }
+  }
   displaySearch: boolean = false;
   messagecontent: string = '';
   chats!: Chat[];
@@ -90,6 +97,7 @@ export class ChatInterface implements OnInit {
           this.messages = res;
           console.log(this.messages);
           this.cdr.detectChanges();
+          setTimeout(() => this.scrollToBottom(), 50);
         },
         error: (err) => {
           console.log("error fetching: " + err);
@@ -104,8 +112,9 @@ export class ChatInterface implements OnInit {
     }
   }
 
+
   sendMessage() {
-    if (this.currentUser && this.currentChat && this.currentChat.otherUsername && this.messagecontent.length>0) {
+    if (this.currentUser && this.currentChat && this.currentChat.otherUsername && this.messagecontent.length > 0) {
       const messageDto = {
         senderId: this.currentUser.id,
         recipientUsername: this.currentChat.otherUsername,
@@ -114,17 +123,16 @@ export class ChatInterface implements OnInit {
       };
 
       this.webSocketService.sendMessage(messageDto);
-      this.chatService.sendMessage(this.currentUser.id, this.currentChat.otherUsername, this.messagecontent).subscribe({
 
-        next: (res) => {
-          this.messages.push(res);
-          this.messagecontent = '';
-          this.cdr.detectChanges();
-        },
-        error: (err) => {
-          console.log("failed");
-        }
-      })
+      this.messages.push({
+        senderId: this.currentUser.id,
+        content: this.messagecontent,
+        received: false,
+        timestamp: new Date().toISOString()
+      } as any);
+
+      this.messagecontent = '';
+      this.cdr.detectChanges();
     }
   }
 
@@ -161,12 +169,14 @@ export class ChatInterface implements OnInit {
   }
 
   setCurrentChat(user: User) {
-    //make a mock chat object that will be discarded if no messages are sent
     this.currentChat = {
       id: -1,
       users: [this.currentUser, user],
       otherUsername: user.username,
     };
+    this.messages = [];
+    this.fetchMessages();
+    this.cdr.detectChanges();
   }
   searchChats(searchInput: string) {
     this.filteredChats = this.chats.filter(chat =>

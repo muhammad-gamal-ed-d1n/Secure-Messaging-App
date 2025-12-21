@@ -51,6 +51,7 @@ body{
   margin-left: 300px;
   width: calc(100% - 300px);
   display: flex;
+  height:100vh;
 }
 @media (max-width: 770px) {
   .left-tab {
@@ -60,7 +61,9 @@ body{
     margin-left: 150px;
     width: calc(100% - 150px);
   }
-
+  .chat-input-bar{
+    width: calc(100% - 150px);
+  }
 }
 .inner-tab {
   z-index: 10;
@@ -371,23 +374,24 @@ chat-menu.active {
   z-index: 7;
   position: relative;
   background: white;
-  overflow-y: auto;
   padding: 10px;
   padding-left: 0;
-  height: 100vh;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  overflow: hidden;
 }
 
 .chat-bar {
   display: flex;
   justify-content: space-between;
-  position: relative;
   width: 100%;
   height: 70px;
   background-color: white;
   border-bottom: solid 1px gray;
+  position:fixed;
+  z-index: 100;
+  top: 0;
 }
 
 .chat-bar .profile-img-container {
@@ -400,7 +404,9 @@ chat-menu.active {
   font-weight: normal;
   width: 100%;
 }
-
+.chat-name{
+  margin-left:5px;
+}
 .chat-bar-right {
   display: flex;
   align-items: center;
@@ -425,14 +431,19 @@ chat-menu.active {
 
 .chat-input-bar {
   height: 70px;
-  width: 100%;
+  width: calc(100% - 300px);
   display: flex;
+  flex-direction: row;
   align-items: center;
   padding: 0 20px;
   background: white;
   border-top: 1px solid gray;
   box-sizing: border-box;
   margin-top: auto;
+  position: fixed;
+  bottom:0;
+  left:300px;
+  z-index: 5;
 }
 
 .chat-input {
@@ -473,29 +484,64 @@ chat-menu.active {
   object-fit: contain;
   filter: invert(100%); /* makes white icon on black button */
 }
-.message-received{
+.text-message{
   display: flex;
   width: 100%;
-  justify-content: start;
-  align-items: flex-start;
-  margin-left: 10px;
+  justify-content: flex-start;
   margin-top: 20px;
   margin-bottom: 10px;
 }
-.message-received span, .message-sent span{
+.text-message span{
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.4);
   padding: 10px;
   border-radius: 10px;
+  position: relative;
+  max-width: 70%;
+  word-wrap: break-word;
 }
 
+.text-message span {
+  border:2px solid #727c74;
+}
+
+.message-sent span {
+  border:2px solid #000000;
+  margin-left:0;
+  margin-right:15px;
+}
+.message-sent span::after {
+  position: absolute;
+  bottom: -18px;
+  right: 5px;
+  font-size: 12px;
+}
+.message-sent{
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+.messages-container{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  gap:15px;
+  padding:10px;
+  padding-bottom: 80px;
+  padding-top: 80px;
+  flex:1;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+.text-message.message-sent{
+  justify-content: flex-end !important;
+}
 /* Base message positioning */
 .message-received {
   position: relative;
   padding-right: 26px; /* space for status */
 }
 
-/* 1️⃣ Pending (default: not yet sent) */
-.message-received::after {
+.message-recived::after {
   content: "…";
   position: absolute;
   bottom: 4px;
@@ -505,19 +551,17 @@ chat-menu.active {
 }
 
 /* 2️⃣ Sent */
-.message-sent::after {
+.message-sent.not-read span::after {
   content: "✔";
   color: gray;
 }
 
 /* 3️⃣ Received */
-.message-received::after {
+.message-sent.recived span::after {
   content: "✔✔";
   color: gray;
-}
-
-/* read */
-.message-read::after {
+}/* 3️⃣ Received */
+.message-sent.read span::after {
   content: "✔✔";
   color: green;
 }

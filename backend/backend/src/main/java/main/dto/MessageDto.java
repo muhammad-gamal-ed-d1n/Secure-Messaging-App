@@ -1,14 +1,14 @@
 package main.dto;
 
+import java.io.Serializable;
+import java.time.LocalDateTime;
+
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import main.model.Message;
 import main.model.MessageType;
-
-import java.io.Serializable;
-import java.time.LocalDateTime;
 @Getter
 @Setter
 @Data
@@ -32,7 +32,6 @@ public class MessageDto implements Serializable {
         this.senderId = message.getSender().getId();
         this.recipientUsername = message.getRecipient().getUsername();
         this.type = MessageType.CHAT;
-        this.received = false;
-        this.state ="NotRead";
+        this.state = message.getState();
     }
 }
