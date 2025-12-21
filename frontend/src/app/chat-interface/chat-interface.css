@@ -476,28 +476,35 @@ chat-menu.active {
 .text-message{
   display: flex;
   width: 100%;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: flex-start;
   margin-left: 10px;
   margin-top: 20px;
   margin-bottom: 10px;
 }
-.text-message span, .message-sent span{
+.text-message span{
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.4);
   padding: 10px;
   border-radius: 10px;
+  position: relative;
+  max-width: 70%;
 }
-
 .text-message span {
   border:2px solid #727c74;
 }
 
 .message-sent span {
   border:2px solid #000000;
+  margin-left:15px;
 }
-
+.message-sent span::after {
+  position: absolute;
+  bottom: -18px;
+  right: 5px;
+  font-size: 12px;
+}
 .message-sent{
-  margin-left: auto;
+  justify-content: flex-end;
   margin-top: 20px;
 }
 .messages-container{
@@ -506,6 +513,7 @@ chat-menu.active {
   width: 100%;
   height: 100%;
   gap:15px;
+  padding:10px;
 }
 /* Base message positioning */
 .message-recived {
@@ -513,7 +521,6 @@ chat-menu.active {
   padding-right: 26px; /* space for status */
 }
 
-/* 1️⃣ Pending (default: not yet sent) */
 .message-recived::after {
   content: "…";
   position: absolute;
@@ -524,17 +531,17 @@ chat-menu.active {
 }
 
 /* 2️⃣ Sent */
-.message-sent::after {
+.message-sent.not-read span::after {
   content: "✔";
   color: gray;
 }
 
 /* 3️⃣ Received */
-.message-received::after {
+.message-sent.recived span::after {
   content: "✔✔";
   color: gray;
 }/* 3️⃣ Received */
-.message-read::after {
+.message-sent.read span::after {
   content: "✔✔";
   color: green;
 }
