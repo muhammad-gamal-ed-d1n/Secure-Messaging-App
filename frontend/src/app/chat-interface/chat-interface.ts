@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Injectable, NgModule, signal } from '@angular/core';
+import {ChangeDetectorRef, Component, ElementRef, Injectable, NgModule, signal, ViewChild} from '@angular/core';
 import { Router, RouterOutlet } from "@angular/router";
 import { AuthService } from '../auth/auth service/AuthService';
 import { User } from '../model/User';
@@ -25,6 +25,13 @@ import { filter } from 'rxjs';
 })
 export class ChatInterface {
   activeView = signal<'chat' | 'service'>('chat');
+  @ViewChild('scrollContainer') private myScrollContainer!: ElementRef;
+  scrollToBottom():void{
+    if(this.myScrollContainer){
+      const element = this.myScrollContainer.nativeElement;
+      element.scrollTop = element.scrollHeight;
+    }
+  }
   displaySearch: boolean = false;
   messagecontent:string='';
   chats!: Chat[];
@@ -71,6 +78,7 @@ export class ChatInterface {
           this.messages = res;
           console.log(this.messages);
           this.cdr.detectChanges();
+          setTimeout(() => this.scrollToBottom(), 50);
         },
         error: (err) => {
           console.log("error fetching: " + err);
@@ -88,17 +96,20 @@ export class ChatInterface {
     if(this.currentUser && this.currentChat && this.currentChat.otherUsername && this.messagecontent.length>0 ){
       console.log("did we make it this time");
 
-    this.chatService.sendMessage(this.currentUser.id,this.currentChat.otherUsername,this.messagecontent).subscribe({
+
+      this.chatService.sendMessage(this.currentUser.id,this.currentChat.otherUsername,this.messagecontent).subscribe({
       next: (res) => {
         this.messages.push(res);
+        console.log(res);
         this.messagecontent='';
         this.cdr.detectChanges();
+        setTimeout(() => this.scrollToBottom(), 50);
       },
       error: (err) => {
         console.log("failed");
       }
     })
-  }
+    }
   }
   openMenu() {
     this.activeView.set('chat');

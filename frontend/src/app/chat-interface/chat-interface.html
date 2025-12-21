@@ -122,12 +122,12 @@
               </div>
             </div>
           </div>
-          <div class="messages-container">
+          <div class="messages-container" #scrollContainer>
             @for (item of messages; track $index) {
               <div
                 class="text-message"
                 [ngClass]="{
-                'message-sent': item.senderId == currentUser.id,
+                'message-sent': +item.senderId === +currentUser.id,
                 'not-read': item.state === 'NotRead',
                 'received': item.state === 'Recieved',
                 'read': item.state === 'read'
