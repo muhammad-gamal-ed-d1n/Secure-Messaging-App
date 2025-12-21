@@ -63,7 +63,9 @@ public class MessageController {
     @MessageMapping("/chat.sendMessage")
     public MessageDto sendMessage(@Payload MessageDto messageDto) {
         messageService.createMessage(messageDto.getSenderId(), messageDto.getRecipientUsername(), messageDto.getContent());
-        messagingTemplate.convertAndSendToUser(messageDto.getRecipientUsername(), "/queue/messages", messageDto);
+        // Publish to a topic per recipient so frontend subscriptions receive messages
+        String dest = "/topic/messages/" + messageDto.getRecipientUsername();
+        messagingTemplate.convertAndSend(dest, messageDto);
         return messageDto;
     }
 

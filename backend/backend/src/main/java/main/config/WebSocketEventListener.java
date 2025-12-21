@@ -18,7 +18,7 @@ public class WebSocketEventListener {
     private final SimpMessageSendingOperations messageTemplate;
 
     @EventListener
-    public void handleWebSocketConnectListener(SessionDisconnectEvent event) {
+    public void handleWebSocketDisconnectListener(SessionDisconnectEvent event) {
         StompHeaderAccessor headerAccessor = StompHeaderAccessor.wrap(event.getMessage());
         Long userId = (Long) headerAccessor.getSessionAttributes().get("userId");
 

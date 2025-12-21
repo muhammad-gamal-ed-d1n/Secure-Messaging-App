@@ -25,10 +25,19 @@ export class WebSocketService {
   }
 
   subscribeToPrivateMessages(username: string, callback: (msg: any) => void) {
-    // match the destination with the backend configuration
-    this.stompClient.subscribe(`/user/queue/messages`, (payload: any) => {
-      callback(JSON.parse(payload.body));
-    });
+    // Subscribe to a topic specific to this username. The backend sends messages to
+    // `/topic/messages/{username}` so this will receive messages addressed to this user
+    // without relying on a server-side Principal mapping.
+    try {
+      this.stompClient.subscribe(`/topic/messages/${username}`, (payload: any) => {
+        callback(JSON.parse(payload.body));
+      });
+    } catch (e) {
+      // Fallback to user destination if needed
+      this.stompClient.subscribe(`/user/queue/messages`, (payload: any) => {
+        callback(JSON.parse(payload.body));
+      });
+    }
   }
 
   // Subscribe to status updates

@@ -1,1 +1,1 @@
-# Sercure Messaging App
+# Secure Messaging App

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, Output,AfterViewInit, ElementRef, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Output, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import { User } from '../model/User';
 import { UserService } from '../service/user.service';
 import { FormsModule } from '@angular/forms';
@@ -6,11 +6,12 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-add-chat-component',
+  standalone: true,
   imports: [FormsModule, CommonModule],
   templateUrl: './add-chat-component.html',
-  styleUrl: './add-chat-component.css',
+  styleUrls: ['./add-chat-component.css'],
 })
-export class AddChatComponent {
+export class AddChatComponent implements AfterViewInit {
   @ViewChild('myInput') myInput!: ElementRef<HTMLInputElement>;
 
   ngAfterViewInit(): void {

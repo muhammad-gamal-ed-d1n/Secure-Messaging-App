@@ -1,5 +1,5 @@
-import { ChangeDetectorRef, Component, Injectable, NgModule, signal } from '@angular/core';
-import { Router, RouterOutlet } from "@angular/router";
+import { ChangeDetectorRef, Component, OnInit, signal } from '@angular/core';
+import { RouterOutlet, Router } from "@angular/router";
 import { AuthService } from '../auth/auth service/AuthService';
 import { User } from '../model/User';
 import { Chat } from '../model/Chat';
@@ -12,20 +12,19 @@ import {Message} from '../model/Message';
 import { AddChatComponent } from "../add-chat-component/add-chat-component";
 import { filter } from 'rxjs';
 
-@Injectable()
 @Component({
   selector: 'app-chat-interface',
+  standalone: true,
   imports: [
     RouterOutlet,
     FormsModule,
     CommonModule,
     AddChatComponent
   ],
-
   templateUrl: './chat-interface.html',
-  styleUrl: './chat-interface.css',
+  styleUrls: ['./chat-interface.css'],
 })
-export class ChatInterface {
+export class ChatInterface implements OnInit {
   activeView = signal<'chat' | 'service'>('chat');
   displaySearch: boolean = false;
   messagecontent: string = '';

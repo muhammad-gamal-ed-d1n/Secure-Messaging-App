@@ -1,16 +1,4 @@
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet" href="chat-interface.css">
-  <title>App</title>
-</head>
-
-<body>
-  <app-add-chat-component (currentChat)="setCurrentChat($event)" (closeSearchSignal)="displaySearch=false" *ngIf="displaySearch"></app-add-chat-component>
+<app-add-chat-component (currentChat)="setCurrentChat($event)" (closeSearchSignal)="displaySearch=false" *ngIf="displaySearch"></app-add-chat-component>
   <div class="container">
     <section class="left-tab">
       <div class="inner-tab">
@@ -108,14 +96,13 @@
             </div>
           </div>
           <div class="messages-container">
-          @for(item of messages ; track $index){
-            <div class="message-recived" [ngClass]="{
-      'message-received': item.received,
-      'message-read': item.read,
-      'message-sent': !item.received}">
-             <span> {{ item.content }}</span>
+            <div *ngFor="let item of messages; let i = index" class="message" [ngClass]="{
+              'message-received': item.received,
+              'message-read': item.read,
+              'message-sent': !item.received
+            }">
+              <span> {{ item.content }} </span>
             </div>
-          }
           </div>
           <div class="chat-input-bar">
             <input type="text" (keydown.enter)="sendMessage()" class="chat-input" placeholder="Type a message..." name="message" [(ngModel)]="messagecontent">
@@ -129,4 +116,3 @@
     </div>
   </div>
   <router-outlet></router-outlet>
-</body>

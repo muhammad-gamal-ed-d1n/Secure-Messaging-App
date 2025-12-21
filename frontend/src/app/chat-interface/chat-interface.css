@@ -488,66 +488,14 @@ chat-menu.active {
   border-radius: 10px;
 }
 
-.message-received span {
-  border:2px solid #727c74;
-}
-
-.message-sent span {
-  border:2px solid #000000;
-}
-
-.message-sent{
-  margin-left: auto;
-  margin-top: 20px;
-}
-.messages-container{
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
-  gap:15px;
-}
-
-/* Container for name and status text */
-.header-text-info {
-  display: flex;
-  flex-direction: column;
-  margin-left: 12px;
-}
-
-.header-text-info h3 {
-  margin: 0;
-  font-size: 1.1rem;
-}
-
-/* Status text below the name */
-.status-label {
-  font-size: 0.75rem;
-  font-weight: 500;
-  text-transform: lowercase;
-}
-
-/* The small dot on the profile image in the header */
-.header-status-dot {
-  position: absolute;
-  bottom: 2px;
-  right: 2px;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  border: 2px solid #fff;
-}
-
-.online { background-color: #4CAF50; }
-.offline { background-color: #bbb; }
 /* Base message positioning */
-.message-recived {
+.message-received {
   position: relative;
   padding-right: 26px; /* space for status */
 }
 
 /* 1️⃣ Pending (default: not yet sent) */
-.message-recived::after {
+.message-received::after {
   content: "…";
   position: absolute;
   bottom: 4px;
@@ -566,7 +514,9 @@ chat-menu.active {
 .message-received::after {
   content: "✔✔";
   color: gray;
-}/* 3️⃣ Received */
+}
+
+/* read */
 .message-read::after {
   content: "✔✔";
   color: green;
