@@ -35,4 +35,6 @@ public class Message implements Serializable {
     @JsonIgnoreProperties("messages")
     private Chat chat;
 
+    @Enumerated(EnumType.STRING)
+    private MessageType type;
 }

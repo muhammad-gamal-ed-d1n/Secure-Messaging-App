@@ -2,21 +2,26 @@ package main.dto;
 
 import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import main.model.Message;
+import main.model.MessageType;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 @Getter
 @Setter
 @Data
+@NoArgsConstructor
 public class MessageDto implements Serializable {
     private Long id;
     private String content;
     private Long chatId;
     private Long senderId;
+    private String recipientUsername;
     private LocalDateTime timeStamp;
     private boolean received;
+    private MessageType type;
 
     public MessageDto(Message message) {
         this.id = message.getId();
@@ -24,6 +29,8 @@ public class MessageDto implements Serializable {
         this.timeStamp = message.getTimeStamp();
         this.chatId = message.getChat().getId();
         this.senderId = message.getSender().getId();
+        this.recipientUsername = message.getRecipient().getUsername();
+        this.type = MessageType.CHAT;
         this.received = false;
     }
 }

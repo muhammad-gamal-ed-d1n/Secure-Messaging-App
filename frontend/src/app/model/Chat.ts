@@ -4,6 +4,7 @@ export class Chat {
     id: number = 0;
     users: User[] = [];
     otherUsername: string = "";
+    isOnline?: boolean;
 
     constructor(init?: Partial<Chat>) {
         Object.assign(this, init);

@@ -79,13 +79,20 @@
       <div class="chat-area">
         <div *ngIf="currentChat" class="chat-area">
           <div class="chat-bar">
-
             <div class="profile-img-container">
-              <img class="profile-img" src="/assets/user.png" alt="">
-              <h3 class="username">
-                {{ currentChat.otherUsername }}
-              </h3>
+              <div style="position: relative;">
+                <img class="profile-img" src="/assets/user.png" alt="">
+                <span class="header-status-dot" [ngClass]="currentChat.isOnline ? 'online' : 'offline'"></span>
+              </div>
+
+              <div class="header-text-info">
+                <h3 class="username">{{ currentChat.otherUsername }}</h3>
+                <span class="status-label" [style.color]="currentChat.isOnline ? '#4CAF50' : '#888'">
+                  {{ currentChat.isOnline ? 'online' : 'offline' }}
+                </span>
+              </div>
             </div>
+
             <div class="chat-bar-right">
               <div class="chat-settings-img-container">
                 <img (click)="currentChat = null" class="chat-settings-img" src="/assets/back.png" alt="">
