@@ -404,7 +404,9 @@ chat-menu.active {
   font-weight: normal;
   width: 100%;
 }
-
+.chat-name{
+  margin-left:5px;
+}
 .chat-bar-right {
   display: flex;
   align-items: center;

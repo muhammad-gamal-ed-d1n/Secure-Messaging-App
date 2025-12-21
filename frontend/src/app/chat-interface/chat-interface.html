@@ -79,11 +79,8 @@
             <div class="chat-details">
               <div class="top-details">
                 <div class="chat-name">{{ chat.otherUsername }}</div>
-                <div class="message-time">10:42am</div>
               </div>
               <div class="bottom-details">
-                <div class="last-message">Q2VsdHhWb0hZbDRNQkR2Vg==</div>
-                <div class="message-count">2</div>
               </div>
             </div>
           </div>
@@ -127,9 +124,9 @@
               <div
                 class="text-message"
                 [ngClass]="{
-                'message-sent': +item.senderId === +currentUser.id,
+                'message-sent': +item.senderId === +currentUser.id || +item === +currentUser.id,
                 'not-read': item.state === 'NotRead',
-                'received': item.state === 'Recieved',
+                'recived': item.state === 'Recieved',
                 'read': item.state === 'read'
               }"
               >

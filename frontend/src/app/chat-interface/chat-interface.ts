@@ -99,11 +99,22 @@ export class ChatInterface {
 
       this.chatService.sendMessage(this.currentUser.id,this.currentChat.otherUsername,this.messagecontent).subscribe({
       next: (res) => {
-        this.messages.push(res);
-        console.log(res);
+        this.fetchMessages();
+        this.chatService.getChats().subscribe({
+          next: (res: Chat[]) => {
+            this.chats = res;
+            this.filteredChats = this.chats;
+
+            for(let i = 0; i < this.chats.length; i++) {
+              this.chats[i].otherUsername = this.getOtherUsername(this.chats[i]);
+            }
+            this.cdr.detectChanges();
+          },
+          error: (err) => {
+            console.log(err);
+          }
+        });
         this.messagecontent='';
-        this.cdr.detectChanges();
-        setTimeout(() => this.scrollToBottom(), 50);
       },
       error: (err) => {
         console.log("failed");
