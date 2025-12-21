@@ -25,17 +25,14 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf(csrf -> csrf.disable()).
-                sessionManagement(sesMan -> sesMan.sessionCreationPolicy(SessionCreationPolicy.STATELESS)).
-                authorizeHttpRequests(auth -> auth.requestMatchers("/api/auth/**").permitAll().
-                        requestMatchers("/api/user/getAll").permitAll().
-                        requestMatchers("/api/chat/**").permitAll().
-                        requestMatchers("/api/message/allmessages/**").permitAll().
-                        requestMatchers("/api/message/create").permitAll().
-                        requestMatchers("/api/user/search/**").permitAll().
-                        requestMatchers("/api/message/state").permitAll().
-                        anyRequest().authenticated()).
-                addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+        http.csrf(csrf -> csrf.disable())
+                .sessionManagement(sesMan -> sesMan.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers("/ws/**").permitAll()
+                        .requestMatchers("/api/chat/**").permitAll()
+                        .anyRequest().authenticated())
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
