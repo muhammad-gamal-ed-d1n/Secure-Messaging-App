@@ -1,4 +1,12 @@
-import {ChangeDetectorRef, Component, ElementRef, Injectable, NgModule, signal, ViewChild} from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  Injectable,
+  OnInit,
+  signal,
+  ViewChild
+} from '@angular/core';
 import { Router, RouterOutlet } from "@angular/router";
 import { AuthService } from '../auth/auth service/AuthService';
 import { User } from '../model/User';
@@ -6,40 +14,36 @@ import { Chat } from '../model/Chat';
 import { FormsModule } from "@angular/forms";
 import { CommonModule } from '@angular/common';
 import { ChatService } from '../chat/chat.service';
-import {HttpClient, HttpParams} from '@angular/common/http';
-import {Message} from '../model/Message';
+import { HttpClient } from '@angular/common/http';
+import { Message } from '../model/Message';
 import { AddChatComponent } from "../add-chat-component/add-chat-component";
-import { filter } from 'rxjs';
 
-@Injectable()
 @Component({
   selector: 'app-chat-interface',
+  standalone: true,
   imports: [
     RouterOutlet,
     FormsModule,
     CommonModule,
     AddChatComponent
-],
+  ],
   templateUrl: './chat-interface.html',
   styleUrl: './chat-interface.css',
 })
-export class ChatInterface {
+export class ChatInterface implements OnInit {
   activeView = signal<'chat' | 'service'>('chat');
   @ViewChild('scrollContainer') private myScrollContainer!: ElementRef;
-  scrollToBottom():void{
-    if(this.myScrollContainer){
-      const element = this.myScrollContainer.nativeElement;
-      element.scrollTop = element.scrollHeight;
-    }
-  }
+
   displaySearch: boolean = false;
-  messagecontent:string='';
-  chats!: Chat[];
-  filteredChats!: Chat[];
+  messagecontent: string = '';
+  chats: Chat[] = [];
+  filteredChats: Chat[] = [];
   currentUser!: User;
   currentChat?: Chat | null;
-  messages:Message[]=[];
-  constructor(private authService: AuthService,
+  messages: Message[] = [];
+
+  constructor(
+    private authService: AuthService,
     private router: Router,
     private chatService: ChatService,
     private cdr: ChangeDetectorRef,
@@ -53,14 +57,15 @@ export class ChatInterface {
         this.currentUser = curr;
         this.cdr.detectChanges();
       }
-    })
+    });
+
 
     this.chatService.getChats().subscribe({
       next: (res: Chat[]) => {
         this.chats = res;
         this.filteredChats = this.chats;
 
-        for(let i = 0; i < this.chats.length; i++) {
+        for (let i = 0; i < this.chats.length; i++) {
           this.chats[i].otherUsername = this.getOtherUsername(this.chats[i]);
         }
         this.cdr.detectChanges();
@@ -69,14 +74,30 @@ export class ChatInterface {
         console.log(err);
       }
     });
+
+
+    this.chatService.messageReceived.subscribe((newMsg: Message) => {
+
+      if (this.currentChat && newMsg.chatId === this.currentChat.id) {
+        this.messages.push(newMsg);
+        this.cdr.detectChanges();
+        setTimeout(() => this.scrollToBottom(), 50);
+      }
+    });
+  }
+
+
+  selectChat(chat: Chat) {
+    this.currentChat = chat;
+    this.fetchMessages();
+    this.chatService.initializeWebSocketConnection(chat.id);
   }
 
   fetchMessages(): void {
-    if(this.currentUser && this.currentChat && this.currentChat.otherUsername ){
-      this.chatService.getMessages(this.currentUser.id,this.currentChat.otherUsername).subscribe({
-        next: (res) => {
+    if (this.currentUser && this.currentChat && this.currentChat.otherUsername) {
+      this.chatService.getMessages(this.currentUser.id, this.currentChat.otherUsername).subscribe({
+        next: (res: Message[]) => {
           this.messages = res;
-          console.log(this.messages);
           this.cdr.detectChanges();
           setTimeout(() => this.scrollToBottom(), 50);
         },
@@ -84,33 +105,34 @@ export class ChatInterface {
           console.log("error fetching: " + err);
         }
       });
-     this.chatService.setRead(this.currentUser.id,this.currentChat.otherUsername).subscribe({
-       next: (res) => {
-       },
-       error: (err) => {
-       }
-     })
+
+      this.chatService.setRead(this.currentUser.id, this.currentChat.otherUsername).subscribe();
     }
   }
-  sendMessage(){
-    if(this.currentUser && this.currentChat && this.currentChat.otherUsername && this.messagecontent.length>0 ){
-      console.log("did we make it this time");
 
+  sendMessage() {
+    if (this.currentUser && this.currentChat && this.currentChat.otherUsername && this.messagecontent.length > 0) {
 
-      this.chatService.sendMessage(this.currentUser.id,this.currentChat.otherUsername,this.messagecontent).subscribe({
-      next: (res) => {
-        this.messages.push(res);
-        console.log(res);
-        this.messagecontent='';
-        this.cdr.detectChanges();
-        setTimeout(() => this.scrollToBottom(), 50);
-      },
-      error: (err) => {
-        console.log("failed");
-      }
-    })
+      this.chatService.sendWSMessage(
+        this.currentUser.id,
+        this.currentChat.otherUsername,
+        this.messagecontent
+      );
+      this.messagecontent = '';
     }
   }
+
+
+  setCurrentChat(user: User) {
+    this.currentChat = {
+      id: -1,
+      users: [this.currentUser, user],
+      otherUsername: user.username,
+    };
+
+    this.chatService.initializeWebSocketConnection(-1);
+  }
+
   openMenu() {
     this.activeView.set('chat');
   }
@@ -119,22 +141,23 @@ export class ChatInterface {
     this.activeView.set('service');
   }
 
-  logout() {
-    this.authService.logout();
-    this.router.navigate(['/login']);
+
+  scrollToBottom(): void {
+    if (this.myScrollContainer) {
+      const element = this.myScrollContainer.nativeElement;
+      element.scrollTop = element.scrollHeight;
+    }
   }
 
   getOtherUsername(chat: Chat) {
     return chat.users.filter(u => u.username !== this.currentUser.username)[0].username;
   }
-  setCurrentChat(user: User) {
-    //make a mock chat object that will be discarded if no messages are sent
-    this.currentChat = {
-      id: -1,
-      users: [this.currentUser, user],
-      otherUsername: user.username,
-    };
+
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
+
   searchChats(searchInput: string) {
     this.filteredChats = this.chats.filter(chat =>
       chat.otherUsername.toLowerCase().includes(searchInput.toLowerCase())

@@ -7,8 +7,8 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-login',
   imports: [
-    FormsModule,
-    RouterLink
+    FormsModule
+
   ],
   templateUrl: './login.html',
   styleUrl: './login.css',
