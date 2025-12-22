@@ -59,6 +59,8 @@ public class MessageController {
 
     @Autowired
     private SimpMessagingTemplate messagingTemplate;
+    @Autowired
+    private main.repo.UserRepo userRepo;
 
     @MessageMapping("/chat.sendMessage")
     public MessageDto sendMessage(@Payload MessageDto messageDto) {
@@ -75,13 +77,27 @@ public class MessageController {
 
         messageDto.setType(main.model.MessageType.JOIN);
         messagingTemplate.convertAndSend("/topic/status", messageDto);
-        
+
         return messageDto;
     }
-    
+
     @PutMapping("/state")
     public ResponseEntity<Void> readMessages(@RequestParam("sender") String sender, @RequestParam("reciver") Long reciver) {
         messageRepo.markMessagesAsRead(sender,reciver);
+        // Notify interested clients that messages have been marked as read
+        try {
+            java.util.Map<String, Object> payload = new java.util.HashMap<>();
+            payload.put("senderUsername", sender);
+            // try to include senderId and reciverUsername for easier client matching
+            userRepo.findUserByUsername(sender).ifPresent(u -> payload.put("senderId", u.getId()));
+            userRepo.findUserById(reciver).ifPresent(u -> payload.put("reciverUsername", u.getUsername()));
+            payload.put("reciverId", reciver);
+            payload.put("state", "read");
+            messagingTemplate.convertAndSend("/topic/message-status", (Object) payload);
+        } catch (Exception e) {
+            // Log and continue; marking messages as read already performed
+            e.printStackTrace();
+        }
         return ResponseEntity.noContent().build();
     }
 }

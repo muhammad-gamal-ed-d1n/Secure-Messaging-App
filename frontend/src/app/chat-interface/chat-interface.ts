@@ -63,11 +63,41 @@ export class ChatInterface implements OnInit {
               if (this.currentChat && newMsg.senderId !== this.currentUser.id) {
                 this.messages.push(newMsg);
                 this.cdr.detectChanges();
+                // Immediately mark messages as read on the server when the recipient
+                // has the chat open so the original sender is notified via websocket.
+                try {
+                  if (this.currentChat && this.currentChat.otherUsername) {
+                    this.chatService.setRead(this.currentUser.id, this.currentChat.otherUsername).subscribe({
+                      next: () => {},
+                      error: (err) => { console.error('Failed to mark messages read', err); }
+                    });
+                  }
+                } catch (e) {
+                  console.error(e);
+                }
               }
             });
             this.webSocketService.subscribeToStatusUpdates((status) => {
               this.updateUserStatus(status.senderId, status.type);
             });
+              this.webSocketService.subscribeToMessageStatus((status: any) => {
+                // status contains senderUsername, reciverUsername, state
+                try {
+                  if (!this.currentUser) return;
+                  // If this client is the original sender of messages that were marked read
+                  if (status.senderUsername === this.currentUser.username) {
+                    const recUser = status.reciverUsername;
+                    if (this.currentChat && this.currentChat.otherUsername === recUser) {
+                      this.messages.forEach(m => {
+                        if (m.senderId === this.currentUser.id) {
+                          m.state = 'read';
+                        }
+                      });
+                      this.cdr.detectChanges();
+                    }
+                  }
+                } catch (e) { console.error(e); }
+              });
           }
         });
         this.cdr.detectChanges();
@@ -128,7 +158,8 @@ export class ChatInterface implements OnInit {
         senderId: this.currentUser.id,
         content: this.messagecontent,
         received: false,
-        timestamp: new Date().toISOString()
+        state: 'NotRead',
+        timeStamp: new Date().toISOString()
       } as any);
 
       this.messagecontent = '';

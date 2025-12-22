@@ -47,6 +47,18 @@ export class WebSocketService {
     });
   }
 
+  // Subscribe to message status updates
+  subscribeToMessageStatus(callback: (status: any) => void) {
+    try {
+      this.stompClient.subscribe('/topic/message-status', (payload: any) => {
+        callback(JSON.parse(payload.body));
+      });
+    } catch (e) {
+      // ignore subscription errors
+      console.error('Failed to subscribe to message-status', e);
+    }
+  }
+
   // Send a message to the server
   sendMessage(message: any) {
     this.stompClient.send('/app/chat.sendMessage', {}, JSON.stringify(message));
