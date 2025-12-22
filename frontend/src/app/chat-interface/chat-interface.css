@@ -314,7 +314,6 @@ chat-menu.active {
   width: 75%;
   height: 75%;
 }
-
 .encryption-service-container {
   display: flex;
   align-items: center;
@@ -333,91 +332,6 @@ chat-menu.active {
 .encryption-service-container.active{
   opacity: 1;
   visibility: visible;
-}
-.encryption-service {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 90%;
-  height: 90%;
-  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.6);
-  border-radius: 20px;
-  background-color: #f9f9f9;
-  gap:10px;
-}
-
-.encrypt-decrypt {
-  padding: 10px;
-  width: 70%;
-  display: flex;
-  justify-content: space-between;
-}
-
-.encrypt, .decrypt {
-  padding: 4px;
-  text-align: center;
-  background-color: black;
-  color: white;
-  border-radius: 5px;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
-  transition: all .3s ease;
-}
-
-.encrypt {
-  background-color: gray;
-  border: solid 1px black;
-}
-
-.encrypt:hover, .decrypt:hover {
-  cursor: pointer;
-  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
-}
-.encrypt:active, .decrypt:active {
-  transform: translateY(5px);
-}
-.parameters {
-  width: 80%;
-  height: 80%;
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-}
-
-.key {
-  width: 100%;
-}
-
-.message {
-  width: 100%;
-  height: 100%;
-}
-
-.key,.message {
-  background-color: rgb(250, 250, 250);
-  border: solid 1px black;
-  border-radius: 4px;
-  outline: none;
-}
-
-.encrypt-message {
-  align-self: flex-end;
-  background-color: black;
-  color: white;
-  padding: 5px;
-  border-radius: 5px;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
-  text-align: center;
-  margin-top: 15px;
-  cursor: pointer;
-  margin-bottom: 15px;
-  transition: all .3s ease;
-}
-.encrypt-message:hover {
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.6);
-  transform:translateY(-2px);
-}
-.encrypt-message:active {
-  transform: translateY(5px);
 }
 .chat-area {
   z-index: 7;
