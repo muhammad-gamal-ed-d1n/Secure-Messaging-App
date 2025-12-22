@@ -208,10 +208,59 @@ chat-menu.active {
   height: 100%;
 }
 
-.profile-img {
+.profile-img-list {
   object-fit: contain;
   height: 70%;
   width: 100%;
+}
+
+.chat-bar .profile-img-container {
+  display: flex;
+  align-items: center;
+  width: auto;
+  margin-left: 15px;
+  gap: 12px;
+}
+
+.chat-bar .profile-img {
+  height: 50px;
+  width: 50px;
+  min-width: 45px;
+  margin: 0;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid #ddd;
+  margin-left: 10px;
+}
+
+.chat-bar .header-status-dot {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid white;
+  z-index: 2;
+}
+
+.online { background-color: #4CAF50; }
+.offline { background-color: #888; }
+
+.header-text-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.header-text-info h3 {
+  font-size: 1.1rem;
+  line-height: 1.2;
+}
+
+.status-label {
+  font-size: 1rem;
+  font-weight: 500;
 }
 
 .last-message {
