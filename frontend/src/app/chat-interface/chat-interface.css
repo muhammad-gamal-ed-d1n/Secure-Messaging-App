@@ -303,10 +303,20 @@ chat-menu.active {
   height: 45px;
   background-color: rgb(250, 250, 250);
   border-radius: 8px;
-  margin-bottom: 15px;
 }
 
 .chat-menu-selector:hover {
+  cursor: pointer;
+}
+
+.logout {
+  width: 80%;
+  height: 45px;
+  background-color: rgb(250, 250, 250);
+  border: none;
+}
+
+.logout:hover {
   cursor: pointer;
 }
 
