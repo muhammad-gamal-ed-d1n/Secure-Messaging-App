@@ -60,10 +60,11 @@ export class ChatInterface implements OnInit {
 
           if (isConnected) {
             console.log("WebSocket connected, now subscribing...");
-            this.webSocketService.subscribeToPrivateMessages(this.currentUser.username, (newMsg) => {
+            this.webSocketService.subscribeToPrivateMessages(this.currentUser.username, (msg:any) => {
 
-              if (this.currentChat && newMsg.senderId !== this.currentUser.id) {
-                this.messages.push(newMsg);
+              if (this.currentChat && msg.senderId === this.currentChat.users.find(u => u.id !== this.currentUser.id)?.id) {
+                this.messages.push(msg);
+                this.scrollToBottom();
                 this.cdr.detectChanges();
                 // Immediately mark messages as read on the server when the recipient
                 // has the chat open so the original sender is notified via websocket.
