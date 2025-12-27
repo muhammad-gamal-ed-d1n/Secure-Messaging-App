@@ -165,6 +165,7 @@ export class ChatInterface implements OnInit {
         timeStamp: new Date().toISOString()
       } as any);
 
+      this.scrollToBottom();
       this.messagecontent = '';
       this.cdr.detectChanges();
     }

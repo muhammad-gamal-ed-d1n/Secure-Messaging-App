@@ -83,6 +83,7 @@ QVP9rRDxQQN3SyUJnA/dHgp50d5KhJ3K6fLrp3XBj1NKZaGX0VCv7oXthaEPj8ZY
     else {
       const b64 = this.base64ToArrayBuffer(this.message);
       const decrypted = await this.decrypt(b64, this.key);
+      debugger;
       this.message = decrypted;
       this.cdr.detectChanges();
     }

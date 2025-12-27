@@ -86,14 +86,12 @@
             <div class="profile-img-container">
               <div style="position: relative; display: flex;">
                 <img class="profile-img" src="/assets/user.png" alt="profile-img" />
-                <span class="header-status-dot" [ngClass]="currentChat.isOnline ? 'online' : 'offline'"></span>
+
               </div>
 
               <div class="header-text-info">
                 <h3 class="username">{{ currentChat.otherUsername }}</h3>
-                <span class="status-label" [style.color]="currentChat.isOnline ? '#4CAF50' : '#888'">
-                  {{ currentChat.isOnline ? 'online' : 'offline' }}
-                </span>
+                
               </div>
             </div>
 
